@@ -13,22 +13,27 @@ import { ThemeProvider } from "react-native-elements";
 import theme from "./src/styles/Theme";
 import { setNavigator } from "./src/navigation/navigationRef";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
-const switchNavigator = createSwitchNavigator({
-  loginFlow: createStackNavigator({
-    Splash: SplashScreen,
-    Register: RegisterScreen,
-    Login: LoginScreen
-  }),
-  mainFlow: createBottomTabNavigator({
-    friendListFlow: createStackNavigator({
-      FriendList: FriendListScreen,
-      FriendDetail: FriendDetailScreen
+const switchNavigator = createSwitchNavigator(
+  {
+    ResolveAuth: ResolveAuthScreen,
+    loginFlow: createStackNavigator({
+      Splash: SplashScreen,
+      Register: RegisterScreen,
+      Login: LoginScreen
     }),
-    Search: SearchScreen,
-    EditProfile: EditProfileScreen
-  })
-});
+    mainFlow: createBottomTabNavigator({
+      friendListFlow: createStackNavigator({
+        FriendList: FriendListScreen,
+        FriendDetail: FriendDetailScreen
+      }),
+      Search: SearchScreen,
+      EditProfile: EditProfileScreen
+    })
+  },
+  { initialRouteName: "ResolveAuth" }
+);
 
 const App = createAppContainer(switchNavigator);
 
