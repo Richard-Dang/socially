@@ -7,18 +7,20 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case "login":
       return { ...state, token: action.payload };
+    case "logout":
+      return { token: null };
     default:
       return state;
   }
 };
 
-const tryLocalLogin = dispatch => () => {
-  const token = AsyncStorage.getItem("token");
+const tryLocalLogin = dispatch => async () => {
+  const token = await AsyncStorage.getItem("token");
   if (token) {
     dispatch({ type: "login", payload: token });
     navigate("FriendList");
   } else {
-    navigate("SplashScreen");
+    navigate("loginFlow");
   }
 };
 
@@ -56,8 +58,14 @@ const login = dispatch => async ({ email, password }) => {
   }
 };
 
+const logout = dispatch => async () => {
+  await AsyncStorage.removeItem("token");
+  dispatch({ type: "logout" });
+  navigate("loginFlow");
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { register, login, tryLocalLogin },
+  { register, login, tryLocalLogin, logout },
   { token: null }
 );
