@@ -14,6 +14,16 @@ import theme from "./src/styles/Theme";
 import { setNavigator } from "./src/navigation/navigationRef";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import { Feather } from "@expo/vector-icons";
+
+const friendListFlow = createStackNavigator({
+  FriendList: FriendListScreen,
+  FriendDetail: FriendDetailScreen
+});
+
+friendListFlow.navigationOptions = {
+  tabBarIcon: <Feather name="home" size={30} />
+};
 
 const switchNavigator = createSwitchNavigator(
   {
@@ -23,14 +33,14 @@ const switchNavigator = createSwitchNavigator(
       Register: RegisterScreen,
       Login: LoginScreen
     }),
-    mainFlow: createBottomTabNavigator({
-      friendListFlow: createStackNavigator({
-        FriendList: FriendListScreen,
-        FriendDetail: FriendDetailScreen
-      }),
-      Search: SearchScreen,
-      EditProfile: EditProfileScreen
-    })
+    mainFlow: createBottomTabNavigator(
+      {
+        Search: SearchScreen,
+        friendListFlow: friendListFlow,
+        EditProfile: EditProfileScreen
+      },
+      { tabBarOptions: { showLabel: false } }
+    )
   },
   { initialRouteName: "ResolveAuth" }
 );
