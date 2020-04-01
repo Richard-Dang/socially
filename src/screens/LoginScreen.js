@@ -1,15 +1,22 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, Text, Input } from "react-native-elements";
+import { Button, Text, Input, Icon } from "react-native-elements";
 import { Context as AuthContext } from "../context/AuthContext";
+import { SafeAreaView } from "react-navigation";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
 
   return (
-    <View>
+    <SafeAreaView forceInset={{ top: "always" }}>
+      <Icon
+        reverse
+        name="back"
+        type="antdesign"
+        onPress={() => navigation.navigate("Splash")}
+      />
       <Text h2>Log In</Text>
       <Input
         label="Email"
@@ -27,8 +34,14 @@ const LoginScreen = () => {
         secureTextEntry
       />
       <Button title="Log in" onPress={() => login({ email, password })} />
-    </View>
+    </SafeAreaView>
   );
+};
+
+LoginScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
 };
 
 export default LoginScreen;

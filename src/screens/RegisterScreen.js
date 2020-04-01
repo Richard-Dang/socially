@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, Text, Input } from "react-native-elements";
+import { Button, Text, Input, Icon } from "react-native-elements";
 import { Context as AuthContext } from "../context/AuthContext";
+import { SafeAreaView } from "react-navigation";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -11,7 +12,14 @@ const RegisterScreen = () => {
   const { register } = useContext(AuthContext);
 
   return (
-    <View>
+    <SafeAreaView forceInset={{ top: "always" }}>
+      <Icon
+        reverse
+        name="back"
+        type="antdesign"
+        onPress={() => navigation.navigate("Splash")}
+      />
+
       <Text h2>Register</Text>
       <Input
         label="Email"
@@ -46,8 +54,14 @@ const RegisterScreen = () => {
         title="Sign up"
         onPress={() => register({ email, username, name, password })}
       />
-    </View>
+    </SafeAreaView>
   );
+};
+
+RegisterScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
 };
 
 export default RegisterScreen;

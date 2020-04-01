@@ -1,20 +1,21 @@
+import { Feather } from "@expo/vector-icons";
 import React from "react";
+import { ThemeProvider, Icon } from "react-native-elements";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import SplashScreen from "./src/screens/SplashScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import FriendListScreen from "./src/screens/FriendListScreen";
-import FriendDetailScreen from "./src/screens/FriendDetailScreen";
-import SearchScreen from "./src/screens/SearchScreen";
-import EditProfileScreen from "./src/screens/EditProfileScreen";
-import { ThemeProvider } from "react-native-elements";
-import theme from "./src/styles/Theme";
-import { setNavigator } from "./src/navigation/navigationRef";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { setNavigator } from "./src/navigation/navigationRef";
+import EditProfileScreen from "./src/screens/EditProfileScreen";
+import FriendDetailScreen from "./src/screens/FriendDetailScreen";
+import FriendListScreen from "./src/screens/FriendListScreen";
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
-import { Feather } from "@expo/vector-icons";
+import SearchScreen from "./src/screens/SearchScreen";
+import SplashScreen from "./src/screens/SplashScreen";
+import theme from "./src/styles/Theme";
+import { StatusBar } from "react-native";
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,
@@ -22,7 +23,7 @@ const friendListFlow = createStackNavigator({
 });
 
 friendListFlow.navigationOptions = {
-  tabBarIcon: <Feather name="home" size={30} />
+  tabBarIcon: <Icon name="home" type="feather" />
 };
 
 const switchNavigator = createSwitchNavigator(
@@ -51,6 +52,7 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
+        <StatusBar barStyle="dark-content" />
         <App
           ref={navigator => {
             setNavigator(navigator);
