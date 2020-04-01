@@ -1,14 +1,45 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-elements";
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
   return (
-    <View>
-      <Text>SplashScreen</Text>
+    <View style={styles.container}>
+      <Text h2 style={styles.appName}>
+        Socially
+      </Text>
+      <View style={styles.buttonLayout}>
+        <Button title="Log in" onPress={() => navigation.navigate("Login")} />
+        <Button
+          title="Register"
+          onPress={() => navigation.navigate("Register")}
+        />
+      </View>
     </View>
-  )
-}
+  );
+};
 
-export default SplashScreen
+SplashScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
+};
 
-const styles = StyleSheet.create({})
+export default SplashScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    borderColor: "red",
+    borderWidth: 10,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  appName: { marginBottom: 200 },
+  buttonLayout: {
+    backgroundColor: "white",
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 5
+  }
+});
