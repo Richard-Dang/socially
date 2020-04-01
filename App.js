@@ -1,6 +1,6 @@
-import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { ThemeProvider, Icon } from "react-native-elements";
+import { StatusBar } from "react-native";
+import { Icon, ThemeProvider } from "react-native-elements";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -15,7 +15,6 @@ import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import theme from "./src/styles/Theme";
-import { StatusBar } from "react-native";
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,

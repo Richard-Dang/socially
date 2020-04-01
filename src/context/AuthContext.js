@@ -1,7 +1,7 @@
-import createDataContext from "./createDataContext";
-import sociallyApi from "../api/socially";
 import { AsyncStorage } from "react-native";
+import sociallyApi from "../api/socially";
 import { navigate } from "../navigation/navigationRef";
+import createDataContext from "./createDataContext";
 
 const authReducer = (state, action) => {
   switch (action.type) {

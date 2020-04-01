@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, Text, Input, Icon } from "react-native-elements";
-import { Context as AuthContext } from "../context/AuthContext";
+import React, { useContext, useState } from "react";
+import { StyleSheet } from "react-native";
+import { Button, Icon, Input, Text } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
+import { Context as AuthContext } from "../context/AuthContext";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");

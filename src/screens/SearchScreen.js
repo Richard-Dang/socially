@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Icon, Text } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
-import { Input, Text, Icon } from "react-native-elements";
 
 const SearchScreen = () => {
   return (

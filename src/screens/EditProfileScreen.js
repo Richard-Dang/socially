@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, Button, Icon } from "react-native-elements";
-import { Context as AuthContext } from "../context/AuthContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
+import { Button, Icon, Text } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
+import { Context as AuthContext } from "../context/AuthContext";
 
 const EditProfileScreen = () => {
   const { logout } = useContext(AuthContext);
