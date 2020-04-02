@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Button, Icon, Input, Text } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
+import GlobalStyles from "../styles/GlobalStyles";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <Icon
-        reverse
+        containerStyle={GlobalStyles.backButton}
         name="back"
         type="antdesign"
         onPress={() => navigation.navigate("Splash")}
@@ -22,28 +23,28 @@ const RegisterScreen = ({ navigation }) => {
 
       <Text h2>Register</Text>
       <Input
-        label="Email"
+        placeholder="Email"
         autoCapitalize="none"
         autoCorrect={false}
         value={email}
         onChangeText={setEmail}
       />
       <Input
-        label="Username"
+        placeholder="Username"
         autoCapitalize="none"
         autoCorrect={false}
         value={username}
         onChangeText={setUsername}
       />
       <Input
-        label="Full Name"
+        placeholder="Full Name"
         autoCapitalize="none"
         autoCorrect={false}
         value={name}
         onChangeText={setName}
       />
       <Input
-        label="Password"
+        placeholder="Password"
         autoCapitalize="none"
         autoCorrect={false}
         value={password}

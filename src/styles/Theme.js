@@ -1,12 +1,11 @@
 const theme = {
   Button: {
     titleStyle: {
-      textTransform: "uppercase",
-      fontWeight: "bold"
+      textTransform: "uppercase"
     },
     buttonStyle: {
       backgroundColor: "black",
-      margin: 10
+      margin: 15
     }
   },
   Text: {

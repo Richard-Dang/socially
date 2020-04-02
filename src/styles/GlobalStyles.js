@@ -2,6 +2,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   backButton: {
-    margin: 20
+    alignSelf: "flex-start",
+    marginLeft: 20,
+    marginTop: 20
   }
 });
