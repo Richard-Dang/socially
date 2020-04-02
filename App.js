@@ -15,6 +15,7 @@ import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import theme from "./src/styles/Theme";
+import { Provider as FriendProvider } from "./src/context/FriendContext";
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,
@@ -50,14 +51,16 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <StatusBar barStyle="dark-content" />
-        <App
-          ref={navigator => {
-            setNavigator(navigator);
-          }}
-        />
-      </AuthProvider>
+      <FriendProvider>
+        <AuthProvider>
+          <StatusBar barStyle="dark-content" />
+          <App
+            ref={navigator => {
+              setNavigator(navigator);
+            }}
+          />
+        </AuthProvider>
+      </FriendProvider>
     </ThemeProvider>
   );
 };

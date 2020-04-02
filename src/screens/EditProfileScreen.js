@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Icon, Text } from "react-native-elements";
+import { Button, Icon, Text, Avatar } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
-import { Gravatar, GravatarApi } from "react-native-gravatar";
+import { getAvatarUrl } from "../helpers/gravatar";
 
 const EditProfileScreen = () => {
   const { logout } = useContext(AuthContext);
@@ -11,13 +11,12 @@ const EditProfileScreen = () => {
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <Text h2>Profile</Text>
-      <Gravatar
-        options={{
-          email: "richardspacedang@gmail.com", //TODO: hardcoded
-          parameters: { size: "200", d: "mm" },
-          secure: true
-        }}
-        style={styles.roundedProfileImage}
+      <Avatar
+        rounded
+        size="xlarge"
+        // TODO: Remove hardcoded email
+        source={{ uri: getAvatarUrl("richardspacedang@gmail.com") }}
+        containerStyle={styles.profileImage}
       />
       <Button title="Log out" onPress={logout} />
     </SafeAreaView>
@@ -31,9 +30,7 @@ EditProfileScreen.navigationOptions = {
 export default EditProfileScreen;
 
 const styles = StyleSheet.create({
-  roundedProfileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50
+  profileImage: {
+    alignSelf: "center"
   }
 });
