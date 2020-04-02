@@ -16,6 +16,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import theme from "./src/styles/Theme";
 import { Provider as FriendProvider } from "./src/context/FriendContext";
+import { Provider as SocialAccountProvider } from "./src/context/SocialAccountContext";
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,
@@ -51,16 +52,18 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <ThemeProvider theme={theme}>
-      <FriendProvider>
-        <AuthProvider>
-          <StatusBar barStyle="dark-content" />
-          <App
-            ref={navigator => {
-              setNavigator(navigator);
-            }}
-          />
-        </AuthProvider>
-      </FriendProvider>
+      <SocialAccountProvider>
+        <FriendProvider>
+          <AuthProvider>
+            <StatusBar barStyle="dark-content" />
+            <App
+              ref={navigator => {
+                setNavigator(navigator);
+              }}
+            />
+          </AuthProvider>
+        </FriendProvider>
+      </SocialAccountProvider>
     </ThemeProvider>
   );
 };

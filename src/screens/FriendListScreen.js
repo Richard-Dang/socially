@@ -19,19 +19,11 @@ const FriendListScreen = ({ navigation }) => {
     state: { currentUser }
   } = useContext(AuthContext);
 
-  console.log(currentUser);
-
-  // useEffect(() => {
-  //   // TODO: Check for potential bug of current user not being updated after sign out
-  //   fetchCurrentUser();
-  // }, []);
-
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <NavigationEvents onWillFocus={fetchFriends} />
       <View style={styles.headerContainer}>
         <Text h2>Friends</Text>
-        {/* TODO: Probably a better way of waiting for data before rendering */}
         <TouchableOpacity
           style={styles.profileContainer}
           onPress={() => {

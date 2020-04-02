@@ -1,26 +1,26 @@
 import createDataContext from "./createDataContext";
 import sociallyApi from "../api/socially";
 
-const friendReducer = (state, action) => {
+const socialAccountReducer = (state, action) => {
   switch (action.type) {
-    case "fetch_friends":
+    case "fetch_social_accounts":
       return action.payload;
     default:
       return state;
   }
 };
 
-const fetchFriends = dispatch => async () => {
+const fetchSocialAccounts = dispatch => async () => {
   try {
-    const response = await sociallyApi.get("/friends");
-    dispatch({ type: "fetch_friends", payload: response.data });
+    const response = await sociallyApi.get("/socialaccounts");
+    dispatch({ type: "fetch_social_accounts", payload: response.data });
   } catch (err) {
     console.log(err.response.data);
   }
 };
 
 export const { Provider, Context } = createDataContext(
-  friendReducer,
-  { fetchFriends },
+  socialAccountReducer,
+  { fetchSocialAccounts },
   []
 );
