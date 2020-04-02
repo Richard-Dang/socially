@@ -51,6 +51,7 @@ const RegisterScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
+      {/* TODO: Add error messages for failed login and field validation */}
       <Button
         title="Sign up"
         onPress={() => register({ email, username, name, password })}

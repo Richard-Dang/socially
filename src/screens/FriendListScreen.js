@@ -8,40 +8,38 @@ import {
 } from "react-native";
 import { Text, Avatar } from "react-native-elements";
 import { Context as FriendContext } from "../context/FriendContext";
+import { Context as AuthContext } from "../context/AuthContext";
 import { ListItem } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
 import { getAvatarUrl } from "../helpers/gravatar";
 
-const currentUserProfile = (currentUser, navigation) => (
-  <TouchableOpacity
-    style={styles.profileContainer}
-    onPress={() => {
-      navigation.navigate("FriendDetail", { _id: currentUser._id });
-    }}
-  >
-    <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} />
-  </TouchableOpacity>
-);
-
 const FriendListScreen = ({ navigation }) => {
+  const { state: friends, fetchFriends } = useContext(FriendContext);
   const {
-    state: { friends, currentUser },
-    fetchFriends,
-    fetchCurrentUser
-  } = useContext(FriendContext);
+    state: { currentUser }
+  } = useContext(AuthContext);
 
-  useEffect(() => {
-    // TODO: Check for potential bug of current user not being updated after sign out
-    fetchCurrentUser();
-  }, []);
+  console.log(currentUser);
+
+  // useEffect(() => {
+  //   // TODO: Check for potential bug of current user not being updated after sign out
+  //   fetchCurrentUser();
+  // }, []);
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <NavigationEvents onWillFocus={fetchFriends} />
       <View style={styles.headerContainer}>
         <Text h2>Friends</Text>
-        {/* TODO: Probably a better way of waiting for data before rendering*/}
-        {currentUser ? currentUserProfile(currentUser, navigation) : null}
+        {/* TODO: Probably a better way of waiting for data before rendering */}
+        <TouchableOpacity
+          style={styles.profileContainer}
+          onPress={() => {
+            navigation.navigate("FriendDetail", { _id: currentUser._id });
+          }}
+        >
+          <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} />
+        </TouchableOpacity>
       </View>
       <FlatList
         data={friends}

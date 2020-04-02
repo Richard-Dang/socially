@@ -34,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
+      {/* TODO: Add error messages for failed login and field validation */}
       <Button title="Log in" onPress={() => login({ email, password })} />
     </SafeAreaView>
   );

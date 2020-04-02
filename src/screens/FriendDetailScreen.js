@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { Context as FriendContext } from "../context/FriendContext";
+import { Context as AuthContext } from "../context/AuthContext";
 import { Avatar, Text, Icon } from "react-native-elements";
 import { getAvatarUrl } from "../helpers/gravatar";
 import { SafeAreaView } from "react-navigation";
 import GlobalStyles from "../styles/GlobalStyles";
 
 const FriendDetailScreen = ({ navigation }) => {
+  const { state: friends } = useContext(FriendContext);
   const {
-    state: { friends, currentUser }
-  } = useContext(FriendContext);
+    state: { currentUser }
+  } = useContext(AuthContext);
   const _id = navigation.getParam("_id");
 
   const user =
