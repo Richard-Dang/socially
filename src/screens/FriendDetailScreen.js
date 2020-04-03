@@ -74,7 +74,7 @@ const FriendDetailScreen = ({ navigation }) => {
 FriendDetailScreen.navigationOptions = () => {
   return {
     headerShown: false,
-    tabBarIcon: <Icon name="search" type="feather" />
+    tabBarIcon: <Icon name="person-outline" type="material" />
   };
 };
 

@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
+  FlatList,
   SafeAreaView,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
   View
 } from "react-native";
-import { Text, Avatar } from "react-native-elements";
-import { Context as FriendContext } from "../context/FriendContext";
-import { Context as AuthContext } from "../context/AuthContext";
-import { ListItem, Icon } from "react-native-elements";
+import { Avatar, Text } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
+import FriendListItem from "../components/FriendListItem";
+import { Context as AuthContext } from "../context/AuthContext";
+import { Context as FriendContext } from "../context/FriendContext";
 import { getAvatarUrl } from "../helpers/gravatar";
 
 const FriendListScreen = ({ navigation }) => {
@@ -29,9 +29,6 @@ const FriendListScreen = ({ navigation }) => {
           onPress={() => {
             navigation.navigate("EditProfile");
           }}
-          // onPress={() => {
-          //   navigation.navigate("FriendDetail", { _id: currentUser._id });
-          // }}
         >
           <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} />
         </TouchableOpacity>
@@ -39,23 +36,7 @@ const FriendListScreen = ({ navigation }) => {
       <FlatList
         data={friends}
         keyExtractor={item => item._id}
-        renderItem={({ item: friend }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("FriendDetail", { _id: friend._id });
-              }}
-            >
-              <ListItem
-                chevron
-                title={friend.name}
-                subtitle={friend.bio ? friend.bio : null}
-                leftAvatar={{ source: { uri: getAvatarUrl(friend.email) } }}
-                bottomDivider
-              />
-            </TouchableOpacity>
-          );
-        }}
+        renderItem={({ item: friend }) => <FriendListItem friend={friend} />}
       />
     </SafeAreaView>
   );

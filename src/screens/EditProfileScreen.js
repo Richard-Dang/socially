@@ -68,10 +68,6 @@ const EditProfileScreen = ({ navigation }) => {
   );
 };
 
-EditProfileScreen.navigationOptions = {
-  tabBarIcon: <Icon name="person-outline" type="material" />
-};
-
 export default EditProfileScreen;
 
 const styles = StyleSheet.create({
