@@ -83,7 +83,9 @@ const styles = StyleSheet.create({
   },
   accountLabel: {
     fontSize: 18,
-    marginLeft: 30
+    marginLeft: 30,
+    marginTop: 20,
+    marginBottom: 10
   },
   logoutButtonContainer: {
     position: "absolute",

@@ -9,8 +9,9 @@ const theme = {
     }
   },
   Text: {
-    style: {
-      margin: 15
+    h2Style: {
+      margin: 15,
+      marginLeft: 30
     }
   },
   Input: {

@@ -52,7 +52,7 @@ const FriendDetailScreen = ({ navigation }) => {
         <Text h2 style={styles.name}>
           {user.name}
         </Text>
-        <Text h4>{user.bio}</Text>
+        <Text style={styles.bio}>{user.bio}</Text>
         <FlatList
           scrollEnabled={false}
           data={socialAccounts}
@@ -87,5 +87,11 @@ const styles = StyleSheet.create({
   profileImage: {
     marginTop: 20
   },
-  name: { marginBottom: 0 }
+  name: {
+    fontWeight: "500"
+  },
+  bio: {
+    marginBottom: 20,
+    fontSize: 22
+  }
 });

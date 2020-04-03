@@ -21,13 +21,28 @@ const SocialAccount = ({ accountType, username }) => {
       title={username}
       button
       type={accountType}
-      raised={false}
-      style={{ width: 200 }}
+      raised
+      style={styles.socialButton}
       onPress={openUrl(accountType, username)}
+      fontStyle={styles.buttonFont}
+      iconSize={35}
+      iconStyle={styles.buttonIcon}
     />
   );
 };
 
 export default SocialAccount;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  socialButton: {
+    width: 300,
+    height: 70
+  },
+  buttonFont: {
+    fontSize: 20
+  },
+  buttonIcon: {
+    marginRight: 20
+  },
+
+});

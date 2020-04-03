@@ -20,7 +20,7 @@ const FriendListScreen = ({ navigation }) => {
   } = useContext(AuthContext);
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <NavigationEvents onWillFocus={fetchFriends} />
       <View style={styles.headerContainer}>
         <Text h2>Friends</Text>
@@ -51,6 +51,12 @@ FriendListScreen.navigationOptions = () => {
 export default FriendListScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1
+    // borderColor: "red",
+    // borderWidth: 5,
+  },
   headerContainer: {
     flexDirection: "row"
   },

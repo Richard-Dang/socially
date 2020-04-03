@@ -12,7 +12,7 @@ const FriendListItem = ({ friend, navigation }) => {
       }}
     >
       <ListItem
-        chevron={{ size: 25, color: "black"}}
+        chevron={{ size: 25, color: "black" }}
         title={friend.name}
         subtitle={friend.bio ? friend.bio : null}
         leftAvatar={{
@@ -23,6 +23,7 @@ const FriendListItem = ({ friend, navigation }) => {
           containerStyle: styles.listItemAvatar
         }}
         bottomDivider
+        topDivider
         titleStyle={styles.listItemTitle}
         subtitleStyle={styles.listItemSubtitle}
       />
@@ -37,9 +38,10 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
   listItemSubtitle: {
-    marginTop: -10
+    marginTop: 5
   },
   listItemAvatar: {
-    marginLeft: 20
+    marginLeft: 20,
+    marginRight: 15
   }
 });
