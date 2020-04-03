@@ -12,7 +12,7 @@ const FriendListItem = ({ friend, navigation }) => {
       }}
     >
       <ListItem
-        chevron
+        chevron={{ size: 25, color: "black"}}
         title={friend.name}
         subtitle={friend.bio ? friend.bio : null}
         leftAvatar={{
