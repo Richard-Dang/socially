@@ -31,7 +31,7 @@ const EditProfileScreen = () => {
       />
       <EditableField fieldName="Name" placeholder={currentUser.name} />
       {/* TODO: Properly align input fields */}
-      <EditableField fieldName="Bio    " placeholder={currentUser.bio} />
+      <EditableField fieldName="Bio     " placeholder={currentUser.bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
 
       <FlatList

@@ -11,7 +11,12 @@ const EditableAccount = ({ accountType, username }) => {
         raised={false}
         style={styles.icon}
       />
-      <Input placeholder={username} inputContainerStyle={styles.inputBox} />
+      <Input
+        placeholder={username}
+        inputContainerStyle={styles.inputBox}
+        // TODO: Create onPress handler to remove social media account
+        rightIcon={{ type: "material", name: "cancel" }}
+      />
     </View>
   );
 };
@@ -20,7 +25,7 @@ export default EditableAccount;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "row"
     // borderColor: "red",
     // borderWidth: 5
   },
