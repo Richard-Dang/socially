@@ -26,7 +26,9 @@ const FriendDetailScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
-      <NavigationEvents onWillFocus={fetchSocialAccounts} />
+      <NavigationEvents
+        onWillFocus={() => fetchSocialAccounts({ userId: user._id })}
+      />
       <Icon
         containerStyle={GlobalStyles.backButton}
         name="back"

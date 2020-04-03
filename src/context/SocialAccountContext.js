@@ -10,12 +10,14 @@ const socialAccountReducer = (state, action) => {
   }
 };
 
-const fetchSocialAccounts = dispatch => async () => {
+const fetchSocialAccounts = dispatch => async ({ userId }) => {
   try {
-    const response = await sociallyApi.get("/socialaccounts");
+    console.log({ userId });
+    const response = await sociallyApi.post("/socialaccounts", { userId });
+    console.log(response.data);
     dispatch({ type: "fetch_social_accounts", payload: response.data });
   } catch (err) {
-    console.log(err.response.data);
+    console.log(err);
   }
 };
 
