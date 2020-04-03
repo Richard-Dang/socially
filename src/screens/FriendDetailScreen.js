@@ -15,9 +15,11 @@ const FriendDetailScreen = ({ navigation }) => {
   const {
     state: { currentUser }
   } = useContext(AuthContext);
-  const { state: socialAccounts, fetchSocialAccounts } = useContext(
-    SocialAccountContext
-  );
+  const {
+    state: socialAccounts,
+    fetchSocialAccounts,
+    clearSocialAccounts
+  } = useContext(SocialAccountContext);
 
   const _id = navigation.getParam("_id");
 
@@ -28,6 +30,8 @@ const FriendDetailScreen = ({ navigation }) => {
     <SafeAreaView forceInset={{ top: "always" }}>
       <NavigationEvents
         onWillFocus={() => fetchSocialAccounts({ userId: user._id })}
+        // TODO: onWillBlur currently not working for some reason
+        onWillBlur={clearSocialAccounts}
       />
       <Icon
         containerStyle={GlobalStyles.backButton}
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   profileImage: {
-    marginTop: 90
+    marginTop: 20
   },
-  name: {}
+  name: { marginBottom: 0 }
 });

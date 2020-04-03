@@ -17,6 +17,9 @@ const theme = {
     inputContainerStyle: {
       margin: 15
     }
+  },
+  Header: {
+    backgroundColor: "white"
   }
 };
 
