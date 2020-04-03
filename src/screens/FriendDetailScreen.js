@@ -22,9 +22,7 @@ const FriendDetailScreen = ({ navigation }) => {
   } = useContext(SocialAccountContext);
 
   const _id = navigation.getParam("_id");
-
-  const user =
-    _id === currentUser._id ? currentUser : friends.find(f => f._id === _id);
+  const user = _id ? friends.find(f => f._id === _id) : currentUser;
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
@@ -33,12 +31,17 @@ const FriendDetailScreen = ({ navigation }) => {
         // TODO: onWillBlur currently not working for some reason
         onWillBlur={clearSocialAccounts}
       />
-      <Icon
-        containerStyle={GlobalStyles.backButton}
-        name="back"
-        type="antdesign"
-        onPress={() => navigation.navigate("FriendList")}
-      />
+      {_id ? (
+        <Icon
+          containerStyle={GlobalStyles.backButton}
+          name="back"
+          type="antdesign"
+          onPress={() => navigation.navigate("FriendList")}
+        />
+      ) : (
+        <Text h2>Profile</Text>
+      )}
+
       <View style={styles.container}>
         <Avatar
           rounded
@@ -70,7 +73,8 @@ const FriendDetailScreen = ({ navigation }) => {
 
 FriendDetailScreen.navigationOptions = () => {
   return {
-    headerShown: false
+    headerShown: false,
+    tabBarIcon: <Icon name="search" type="feather" />
   };
 };
 

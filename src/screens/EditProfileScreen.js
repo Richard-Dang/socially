@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
-import { Button, Icon, Text, Avatar, Header } from "react-native-elements";
-import { SafeAreaView, NavigationEvents } from "react-navigation";
+import { FlatList, StyleSheet, View } from "react-native";
+import { Avatar, Button, Header, Icon, Text } from "react-native-elements";
+import { NavigationEvents } from "react-navigation";
+import EditableAccount from "../components/EditableAccount";
+import EditableField from "../components/EditableField";
 import { Context as AuthContext } from "../context/AuthContext";
 import { Context as SocialAccountContext } from "../context/SocialAccountContext";
 import { getAvatarUrl } from "../helpers/gravatar";
-import EditableField from "../components/EditableField";
-import EditableAccount from "../components/EditableAccount";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const EditProfileScreen = () => {
+const EditProfileScreen = ({ navigation }) => {
   const {
     state: { currentUser },
     logout
@@ -18,11 +19,24 @@ const EditProfileScreen = () => {
   );
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
+    <View style={styles.container}>
       <NavigationEvents
         onWillFocus={() => fetchSocialAccounts({ userId: currentUser._id })}
       />
-      <Text h2>Profile</Text>
+      <Header
+        leftComponent={
+          <TouchableOpacity onPress={() => navigation.navigate("FriendList")}>
+            <Text>Cancel</Text>
+          </TouchableOpacity>
+        }
+        centerComponent={{ text: "Edit Profile", style: styles.headerText }}
+        rightComponent={
+          // TODO: Implement save profile action
+          <TouchableOpacity onPress={() => {}}>
+            <Text>Save</Text>
+          </TouchableOpacity>
+        }
+      />
       <Avatar
         rounded
         size="xlarge"
@@ -50,7 +64,7 @@ const EditProfileScreen = () => {
       <View style={styles.logoutButtonContainer}>
         <Button title="Log out" onPress={logout} style={styles.logoutButton} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -77,8 +91,12 @@ const styles = StyleSheet.create({
   },
   logoutButtonContainer: {
     position: "absolute",
-    bottom: 10,
+    bottom: 30,
     alignSelf: "center",
     width: "90%"
+  },
+  headerText: {
+    fontSize: 20,
+    marginTop: 10
   }
 });

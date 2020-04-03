@@ -39,10 +39,11 @@ const switchNavigator = createSwitchNavigator(
       {
         Search: SearchScreen,
         friendListFlow: friendListFlow,
-        EditProfile: EditProfileScreen
+        ShowProfile: FriendDetailScreen
       },
       { tabBarOptions: { showLabel: false } }
-    )
+    ),
+    EditProfile: EditProfileScreen
   },
   { initialRouteName: "ResolveAuth" }
 );

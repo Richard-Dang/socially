@@ -6,7 +6,6 @@ const socialAccountReducer = (state, action) => {
     case "fetch_social_accounts":
       return action.payload;
     case "clear_social_accounts":
-      console.log("dispatch");
       return [];
     default:
       return state;
@@ -23,7 +22,6 @@ const fetchSocialAccounts = dispatch => async ({ userId }) => {
 };
 
 const clearSocialAccounts = dispatch => () => {
-  console.log("Blur");
   dispatch({ type: "clear_social_accounts" });
 };
 

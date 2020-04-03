@@ -9,7 +9,7 @@ import {
 import { Text, Avatar } from "react-native-elements";
 import { Context as FriendContext } from "../context/FriendContext";
 import { Context as AuthContext } from "../context/AuthContext";
-import { ListItem } from "react-native-elements";
+import { ListItem, Icon } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
 import { getAvatarUrl } from "../helpers/gravatar";
 
@@ -27,8 +27,11 @@ const FriendListScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.profileContainer}
           onPress={() => {
-            navigation.navigate("FriendDetail", { _id: currentUser._id });
+            navigation.navigate("EditProfile");
           }}
+          // onPress={() => {
+          //   navigation.navigate("FriendDetail", { _id: currentUser._id });
+          // }}
         >
           <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} />
         </TouchableOpacity>
