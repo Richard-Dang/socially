@@ -9,7 +9,6 @@ export default shouldRefresh => {
   // Search that resulting list by search term by filtering
   const searchAllUsers = async () => {
     try {
-      console.log("searching all users");
       const response = await sociallyApi.get("/search");
       setAllUsers(response.data);
       setResults(response.data);
