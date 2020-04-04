@@ -1,31 +1,47 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { ListItem, Icon } from "react-native-elements";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ListItem, Icon, Text } from "react-native-elements";
 import { getAvatarUrl } from "../helpers/gravatar";
+import sociallyApi from "../api/socially";
 
 const SearchUserListItem = ({ user }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        //Make backend call to add user and remove from search list
+  const [friendAdded, setFriendAdded] = useState(false);
+
+  return friendAdded ? null : (
+    <ListItem
+      rightElement={
+        <TouchableOpacity
+          onPress={async () => {
+            try {
+              await sociallyApi.post("/addfriend", { friendId: user._id });
+              setFriendAdded(true);
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        >
+          <Icon
+            type="material"
+            name="person-add"
+            size={40}
+            iconStyle={styles.addUserIcon}
+          />
+        </TouchableOpacity>
+      }
+      title={user.name}
+      subtitle={`(${user.username})`}
+      leftAvatar={{
+        source: {
+          uri: getAvatarUrl(user.email)
+        },
+        size: 70,
+        containerStyle: styles.listItemAvatar
       }}
-    >
-      <ListItem
-        rightElement={<Icon type="material" name="person-add"/>}
-        title={`${user.name}    (${user.username})`}
-        leftAvatar={{
-          source: {
-            uri: getAvatarUrl(user.email)
-          },
-          size: 70,
-          containerStyle: styles.listItemAvatar
-        }}
-        bottomDivider
-        topDivider
-        titleStyle={styles.listItemTitle}
-        subtitleStyle={styles.listItemSubtitle}
-      />
-    </TouchableOpacity>
+      bottomDivider
+      topDivider
+      titleStyle={styles.listItemTitle}
+      subtitleStyle={styles.listItemSubtitle}
+    />
   );
 };
 
@@ -40,6 +56,9 @@ const styles = StyleSheet.create({
   },
   listItemAvatar: {
     marginLeft: 20,
+    marginRight: 15
+  },
+  addUserIcon: {
     marginRight: 15
   }
 });
