@@ -2,13 +2,14 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Input, Icon } from "react-native-elements";
 
-const EditableField = ({ fieldName, placeholder }) => {
+const EditableField = ({ fieldName, setField, value }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.fieldName}>{fieldName}</Text>
       <Input
-        placeholder={placeholder}
         inputContainerStyle={styles.inputContainer}
+        onChangeText={setField}
+        value={value}
       />
     </View>
   );

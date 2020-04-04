@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { Avatar, Button, Header, Icon, Text } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
@@ -12,11 +12,17 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const EditProfileScreen = ({ navigation }) => {
   const {
     state: { currentUser },
+    updateUser,
     logout
   } = useContext(AuthContext);
   const { state: socialAccounts, fetchSocialAccounts } = useContext(
     SocialAccountContext
   );
+  const [name, setName] = useState(currentUser.name);
+  const [bio, setBio] = useState(currentUser.bio);
+  const [accounts, setAccounts] = useState(socialAccounts);
+
+  const socialAccountUpdate = () => {};
 
   return (
     <View style={styles.container}>
@@ -31,8 +37,16 @@ const EditProfileScreen = ({ navigation }) => {
         }
         centerComponent={{ text: "Edit Profile", style: styles.headerText }}
         rightComponent={
-          // TODO: Implement save profile action
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              // TODO: Implement save profile action
+              // update user in AuthContext with new state values
+              updateUser(name, bio, () => navigation.navigate("FriendList"));
+
+              // Need to make a separate endpoint to update social accounts
+              // socialAccountUpdate();
+            }}
+          >
             <Text>Save</Text>
           </TouchableOpacity>
         }
@@ -43,9 +57,9 @@ const EditProfileScreen = ({ navigation }) => {
         source={{ uri: getAvatarUrl(currentUser.email) }}
         containerStyle={styles.profileImage}
       />
-      <EditableField fieldName="Name" placeholder={currentUser.name} />
+      <EditableField fieldName="Name" setField={setName} value={name} />
       {/* TODO: Properly align input fields */}
-      <EditableField fieldName="Bio     " placeholder={currentUser.bio} />
+      <EditableField fieldName="Bio     " setField={setBio} value={bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
 
       <FlatList
@@ -62,7 +76,7 @@ const EditProfileScreen = ({ navigation }) => {
         }}
       />
       <View style={styles.logoutButtonContainer}>
-        <Button title="Log out" onPress={logout}/>
+        <Button title="Log out" onPress={logout} />
       </View>
     </View>
   );

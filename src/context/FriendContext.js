@@ -25,7 +25,7 @@ const removeFriend = dispatch => async (friendId, callback) => {
   try {
     await sociallyApi.post("/removefriend", { friendId });
     dispatch({ type: "remove_friend", payload: friendId });
-    callback();
+    if (callback) callback();
   } catch (err) {
     console.log(err.response.data);
   }

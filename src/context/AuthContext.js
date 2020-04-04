@@ -12,6 +12,8 @@ const authReducer = (state, action) => {
       };
     case "logout":
       return { ...state, token: null };
+    case "update_user":
+      return { ...state, currentUser: action.payload.currentUser };
     default:
       return state;
   }
@@ -69,8 +71,19 @@ const logout = dispatch => async () => {
   navigate("loginFlow");
 };
 
+const updateUser = dispatch => async (name, bio, callback) => {
+  try {
+    const response = await sociallyApi.put("/user", { name, bio });
+
+    dispatch({ type: "update_user", payload: { currentUser: response.data } });
+    if (callback) callback();
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { register, login, tryLocalLogin, logout },
+  { register, login, tryLocalLogin, logout, updateUser },
   { token: null, currentUser: null }
 );
