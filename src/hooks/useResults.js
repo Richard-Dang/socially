@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import sociallyApi from "../api/socially";
 
-export default () => {
+export default shouldRefresh => {
   const [results, setResults] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
@@ -9,6 +9,7 @@ export default () => {
   // Search that resulting list by search term by filtering
   const searchAllUsers = async () => {
     try {
+      console.log("searching all users");
       const response = await sociallyApi.get("/search");
       setAllUsers(response.data);
       setResults(response.data);
@@ -28,7 +29,7 @@ export default () => {
   // TODO: Refactor this hook into friendContext as a "add_friend" action somehow
   useEffect(() => {
     searchAllUsers();
-  }, []);
+  }, [shouldRefresh]);
 
   return [searchUsers, results];
 };

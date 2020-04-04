@@ -14,7 +14,6 @@ const friendReducer = (state, action) => {
 
 const fetchFriends = dispatch => async () => {
   try {
-    console.log("fetching friends");
     const response = await sociallyApi.get("/friends");
     dispatch({ type: "fetch_friends", payload: response.data });
   } catch (err) {

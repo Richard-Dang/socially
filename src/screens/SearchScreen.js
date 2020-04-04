@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Icon, Text, SearchBar } from "react-native-elements";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView, withNavigationFocus } from "react-navigation";
 import useResults from "../hooks/useResults";
 import { FlatList } from "react-native-gesture-handler";
 import SearchUserListItem from "../components/SearchUserListItem";
 
-const SearchScreen = () => {
+const SearchScreen = ({ isFocused }) => {
   const [term, setTerm] = useState("");
-  const [searchUsers, results] = useResults();
+  const [searchUsers, results] = useResults(isFocused);
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
@@ -37,6 +37,6 @@ SearchScreen.navigationOptions = {
   tabBarIcon: <Icon name="search" type="feather" />
 };
 
-export default SearchScreen;
+export default withNavigationFocus(SearchScreen);
 
 const styles = StyleSheet.create({});
