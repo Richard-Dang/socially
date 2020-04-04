@@ -7,6 +7,12 @@ const socialAccountReducer = (state, action) => {
       return action.payload;
     case "clear_social_accounts":
       return [];
+    case "update_social_accounts":
+      return state.map(socialAccount =>
+        socialAccount._id === action.payload._id
+          ? action.payload
+          : socialAccount
+      );
     default:
       return state;
   }
@@ -25,8 +31,19 @@ const clearSocialAccounts = dispatch => () => {
   dispatch({ type: "clear_social_accounts" });
 };
 
+const updateSocialAccounts = dispatch => async ({ socialAccount }) => {
+  try {
+    const response = await sociallyApi.put("/socialaccounts", {
+      socialAccount
+    });
+    dispatch({ type: "update_social_accounts", payload: response.data });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   socialAccountReducer,
-  { fetchSocialAccounts, clearSocialAccounts },
+  { fetchSocialAccounts, clearSocialAccounts, updateSocialAccounts },
   []
 );

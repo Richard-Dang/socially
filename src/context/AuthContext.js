@@ -71,12 +71,12 @@ const logout = dispatch => async () => {
   navigate("loginFlow");
 };
 
-const updateUser = dispatch => async (name, bio, callback) => {
+// TODO: Probably want to refactor this method into a different context
+const updateUser = dispatch => async (name, bio) => {
   try {
     const response = await sociallyApi.put("/user", { name, bio });
 
     dispatch({ type: "update_user", payload: { currentUser: response.data } });
-    if (callback) callback();
   } catch (err) {
     console.log(err.response.data);
   }

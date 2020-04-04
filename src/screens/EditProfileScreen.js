@@ -15,14 +15,22 @@ const EditProfileScreen = ({ navigation }) => {
     updateUser,
     logout
   } = useContext(AuthContext);
-  const { state: socialAccounts, fetchSocialAccounts } = useContext(
-    SocialAccountContext
-  );
+  const {
+    state: socialAccounts,
+    fetchSocialAccounts,
+    updateSocialAccounts
+  } = useContext(SocialAccountContext);
   const [name, setName] = useState(currentUser.name);
   const [bio, setBio] = useState(currentUser.bio);
   const [accounts, setAccounts] = useState(socialAccounts);
 
-  const socialAccountUpdate = () => {};
+  console.log(accounts);
+
+  const updateProfile = callback => {
+    updateUser(name, bio);
+    updateSocialAccounts(accounts);
+    if (callback) callback();
+  };
 
   return (
     <View style={styles.container}>
@@ -39,12 +47,7 @@ const EditProfileScreen = ({ navigation }) => {
         rightComponent={
           <TouchableOpacity
             onPress={() => {
-              // TODO: Implement save profile action
-              // update user in AuthContext with new state values
-              updateUser(name, bio, () => navigation.navigate("FriendList"));
-
-              // Need to make a separate endpoint to update social accounts
-              // socialAccountUpdate();
+              updateProfile(() => navigation.navigate("FriendList"));
             }}
           >
             <Text>Save</Text>
@@ -64,13 +67,13 @@ const EditProfileScreen = ({ navigation }) => {
 
       <FlatList
         scrollEnabled={false}
-        data={socialAccounts}
+        data={accounts}
         keyExtractor={item => item._id}
-        renderItem={({ item: socialAccount }) => {
+        renderItem={({ item: account }) => {
           return (
             <EditableAccount
-              accountType={socialAccount.accountType}
-              username={socialAccount.username}
+              account={account}
+              accountsState={{ accounts, setAccounts }}
             />
           );
         }}
