@@ -62,7 +62,7 @@ const EditProfileScreen = ({ navigation }) => {
         }}
       />
       <View style={styles.logoutButtonContainer}>
-        <Button title="Log out" onPress={logout} style={styles.logoutButton} />
+        <Button title="Log out" onPress={logout}/>
       </View>
     </View>
   );

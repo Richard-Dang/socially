@@ -25,6 +25,7 @@ export default () => {
     setResults(filteredUsers);
   };
 
+  // TODO: Refactor this hook into friendContext as a "add_friend" action somehow
   useEffect(() => {
     searchAllUsers();
   }, []);

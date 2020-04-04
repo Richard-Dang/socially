@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { Context as FriendContext } from "../context/FriendContext";
 import { Context as AuthContext } from "../context/AuthContext";
 import { Context as SocialAccountContext } from "../context/SocialAccountContext";
-import { Avatar, Text, Icon } from "react-native-elements";
+import { Avatar, Text, Icon, Button } from "react-native-elements";
 import { getAvatarUrl } from "../helpers/gravatar";
 import { SafeAreaView } from "react-navigation";
 import GlobalStyles from "../styles/GlobalStyles";
@@ -11,7 +11,7 @@ import SocialAccount from "../components/SocialAccount";
 import { NavigationEvents } from "react-navigation";
 
 const FriendDetailScreen = ({ navigation }) => {
-  const { state: friends } = useContext(FriendContext);
+  const { state: friends, removeFriend } = useContext(FriendContext);
   const {
     state: { currentUser }
   } = useContext(AuthContext);
@@ -21,11 +21,13 @@ const FriendDetailScreen = ({ navigation }) => {
     clearSocialAccounts
   } = useContext(SocialAccountContext);
 
+  // If _id is null then show current user profile
   const _id = navigation.getParam("_id");
   const user = _id ? friends.find(f => f._id === _id) : currentUser;
 
-  return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+  // If ternary not used, user will be null and app will error (how do prevent render using stale data?)
+  return !user ? null : (
+    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <NavigationEvents
         onWillFocus={() => fetchSocialAccounts({ userId: user._id })}
         // TODO: onWillBlur currently not working for some reason
@@ -42,7 +44,7 @@ const FriendDetailScreen = ({ navigation }) => {
         <Text h2>Profile</Text>
       )}
 
-      <View style={styles.container}>
+      <View style={styles.centerContainer}>
         <Avatar
           rounded
           size={200}
@@ -67,6 +69,16 @@ const FriendDetailScreen = ({ navigation }) => {
           }}
         />
       </View>
+      {_id ? (
+        <View style={styles.removeFriendButtonContainer}>
+          <Button
+            title="Remove friend"
+            onPress={() => {
+              removeFriend(user._id, () => navigation.navigate("FriendList"));
+            }}
+          />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -82,6 +94,9 @@ export default FriendDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  centerContainer: {
     alignItems: "center"
   },
   profileImage: {
@@ -93,5 +108,11 @@ const styles = StyleSheet.create({
   bio: {
     marginBottom: 20,
     fontSize: 22
+  },
+  removeFriendButtonContainer: {
+    position: "absolute",
+    bottom: 20,
+    width: "90%",
+    alignSelf: "center"
   }
 });
