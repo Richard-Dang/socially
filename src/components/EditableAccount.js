@@ -22,7 +22,7 @@ const EditableAccount = ({ socialAccount, modifers }) => {
               removeSocialAccount({ socialAccount });
             }}
           >
-            <Icon type="material" name="cancel" />
+            <Icon type="entypo" name="cross" />
           </TouchableOpacity>
         }
         value={username}

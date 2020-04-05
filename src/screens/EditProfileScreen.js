@@ -8,6 +8,7 @@ import { Context as AuthContext } from "../context/AuthContext";
 import { Context as SocialAccountContext } from "../context/SocialAccountContext";
 import { getAvatarUrl } from "../helpers/gravatar";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import RNPickerSelect from "react-native-picker-select";
 
 const EditProfileScreen = ({ navigation }) => {
   const {
@@ -64,24 +65,48 @@ const EditProfileScreen = ({ navigation }) => {
         source={{ uri: getAvatarUrl(currentUser.email) }}
         containerStyle={styles.profileImage}
       />
+
       <EditableField fieldName="Name" setField={setName} value={name} />
       {/* TODO: Properly align input fields */}
       <EditableField fieldName="Bio     " setField={setBio} value={bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
+      <View>
+        <FlatList
+          scrollEnabled={false}
+          data={socialAccounts}
+          keyExtractor={item => item._id}
+          renderItem={({ item: socialAccount }) => {
+            return (
+              <EditableAccount
+                socialAccount={socialAccount}
+                modifers={{ editSocialAccount, removeSocialAccount }}
+              />
+            );
+          }}
+        />
+      </View>
 
-      <FlatList
-        scrollEnabled={false}
-        data={socialAccounts}
-        keyExtractor={item => item._id}
-        renderItem={({ item: socialAccount }) => {
-          return (
-            <EditableAccount
-              socialAccount={socialAccount}
-              modifers={{ editSocialAccount, removeSocialAccount }}
-            />
-          );
-        }}
-      />
+      <View style={styles.dropdownContainer}>
+        <RNPickerSelect
+          Icon={() => {
+            return (
+              <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
+            );
+          }}
+          style={dropdownStyle}
+          placeholder={{
+            label: "Add account",
+            value: null
+          }}
+          onValueChange={value => console.log(value)}
+          items={[
+            { label: "Football", value: "football" },
+            { label: "Baseball", value: "baseball" },
+            { label: "Hockey", value: "hockey" }
+          ]}
+        />
+      </View>
+
       <View style={styles.logoutButtonContainer}>
         <Button title="Log out" onPress={logout} />
       </View>
@@ -90,6 +115,14 @@ const EditProfileScreen = ({ navigation }) => {
 };
 
 export default EditProfileScreen;
+
+const dropdownStyle = StyleSheet.create({
+  inputIOS: {
+    marginTop: 15,
+    marginBottom: 7,
+    fontSize: 18
+  }
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -117,5 +150,13 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     marginTop: 10
-  }
+  },
+  dropdownContainer: {
+    marginRight: 10,
+    marginLeft: 104,
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+    width: "57%"
+  },
+  addIcon: { marginTop: 13 }
 });
