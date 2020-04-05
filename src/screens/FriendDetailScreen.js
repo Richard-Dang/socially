@@ -55,19 +55,23 @@ const FriendDetailScreen = ({ navigation }) => {
           {user.name}
         </Text>
         <Text style={styles.bio}>{user.bio}</Text>
-        <FlatList
-          // scrollEnabled={false}
-          data={socialAccounts.sort((a, b) => a.accountType.localeCompare(b.accountType))}
-          keyExtractor={item => item._id}
-          renderItem={({ item: socialAccount }) => {
-            return (
-              <SocialAccount
-                accountType={socialAccount.accountType}
-                username={socialAccount.username}
-              />
-            );
-          }}
-        />
+        <View style={styles.accountsContainer}>
+          <FlatList
+            // scrollEnabled={false}
+            data={socialAccounts.sort((a, b) =>
+              a.accountType.localeCompare(b.accountType)
+            )}
+            keyExtractor={item => item._id}
+            renderItem={({ item: socialAccount }) => {
+              return (
+                <SocialAccount
+                  accountType={socialAccount.accountType}
+                  username={socialAccount.username}
+                />
+              );
+            }}
+          />
+        </View>
       </View>
       {_id ? (
         <View style={styles.removeFriendButtonContainer}>
@@ -116,5 +120,8 @@ const styles = StyleSheet.create({
     bottom: 20,
     width: "90%",
     alignSelf: "center"
+  },
+  accountsContainer: {
+    height: 300
   }
 });
