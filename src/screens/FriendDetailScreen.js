@@ -13,17 +13,17 @@ import { NavigationEvents } from "react-navigation";
 const FriendDetailScreen = ({ navigation }) => {
   const { state: friends, removeFriend } = useContext(FriendContext);
   const {
-    state: { currentUser }
+    state: { currentUser },
   } = useContext(AuthContext);
   const {
     state: socialAccounts,
     fetchSocialAccounts,
-    clearSocialAccounts
+    clearSocialAccounts,
   } = useContext(SocialAccountContext);
 
   // If _id is null then show current user profile
   const _id = navigation.getParam("_id");
-  const user = _id ? friends.find(f => f._id === _id) : currentUser;
+  const user = _id ? friends.find((f) => f._id === _id) : currentUser;
 
   // If ternary not used, user will be null and app will error (how do prevent render using stale data?)
   return !user ? null : (
@@ -61,7 +61,7 @@ const FriendDetailScreen = ({ navigation }) => {
             data={socialAccounts.sort((a, b) =>
               a.accountType.localeCompare(b.accountType)
             )}
-            keyExtractor={item => item._id}
+            keyExtractor={(item) => item._id}
             renderItem={({ item: socialAccount }) => {
               return (
                 <SocialAccount
@@ -90,7 +90,7 @@ const FriendDetailScreen = ({ navigation }) => {
 FriendDetailScreen.navigationOptions = () => {
   return {
     headerShown: false,
-    tabBarIcon: <Icon name="person-outline" type="material" />
+    tabBarIcon: <Icon name="person-outline" type="material" />,
   };
 };
 
@@ -98,10 +98,10 @@ export default FriendDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   centerContainer: {
-    alignItems: "center"
+    alignItems: "center",
   },
   profileImage: {
     // marginTop: 0
@@ -109,19 +109,20 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: "500",
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   bio: {
     marginBottom: 20,
-    fontSize: 22
+    fontSize: 22,
   },
   removeFriendButtonContainer: {
     position: "absolute",
     bottom: 20,
     width: "90%",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   accountsContainer: {
-    height: 300
-  }
+    // TODO: Want to use % and flex box to support at screen sizes
+    height: 300,
+  },
 });
