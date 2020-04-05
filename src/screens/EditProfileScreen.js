@@ -19,7 +19,8 @@ const EditProfileScreen = ({ navigation }) => {
     state: socialAccounts,
     fetchSocialAccounts,
     updateSocialAccounts,
-    updateSocialAccountsLocally
+    updateSocialAccountsLocally,
+    removeSocialAccount
   } = useContext(SocialAccountContext);
   const [name, setName] = useState(currentUser.name);
   const [bio, setBio] = useState(currentUser.bio);
@@ -72,6 +73,7 @@ const EditProfileScreen = ({ navigation }) => {
             <EditableAccount
               account={account}
               updateSocialAccountsLocally={updateSocialAccountsLocally}
+              removeSocialAccount={removeSocialAccount}
             />
           );
         }}

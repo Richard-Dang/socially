@@ -13,6 +13,10 @@ const socialAccountReducer = (state, action) => {
           ? action.payload
           : socialAccount
       );
+    case "remove_social_account":
+      return state.filter(
+        socialAccount => socialAccount._id !== action.payload
+      );
     default:
       return state;
   }
@@ -47,13 +51,28 @@ const updateSocialAccounts = dispatch => async ({ socialAccounts }) => {
   }
 };
 
+const removeSocialAccount = dispatch => async ({ accountId }) => {
+  console.log(accountId);
+  try {
+    await sociallyApi.delete("/socialaccounts", {
+      data: {
+        accountId
+      }
+    });
+    dispatch({ type: "remove_social_account", payload: accountId });
+  } catch (err) {
+    console.log(err.response.data);
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   socialAccountReducer,
   {
     fetchSocialAccounts,
     clearSocialAccounts,
     updateSocialAccountsLocally,
-    updateSocialAccounts
+    updateSocialAccounts,
+    removeSocialAccount
   },
   []
 );

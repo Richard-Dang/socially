@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Input, SocialIcon } from "react-native-elements";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Input, SocialIcon, Icon } from "react-native-elements";
 
-const EditableAccount = ({ account, updateSocialAccountsLocally }) => {
+const EditableAccount = ({
+  account,
+  updateSocialAccountsLocally,
+  removeSocialAccount
+}) => {
   const [username, setUsername] = useState(account.username);
 
   return (
@@ -16,7 +20,13 @@ const EditableAccount = ({ account, updateSocialAccountsLocally }) => {
       <Input
         inputContainerStyle={styles.inputBox}
         // TODO: Create onPress handler to remove social media account
-        rightIcon={{ type: "material", name: "cancel" }}
+        rightIcon={
+          <TouchableOpacity
+            onPress={() => removeSocialAccount({ accountId: account._id })}
+          >
+            <Icon type="material" name="cancel" />
+          </TouchableOpacity>
+        }
         value={username}
         onChangeText={newUsername => {
           setUsername(newUsername);
@@ -25,6 +35,7 @@ const EditableAccount = ({ account, updateSocialAccountsLocally }) => {
           updateSocialAccountsLocally(updatedAccount);
         }}
       />
+      {/* TODO: Add dropdown for adding accounts */}
     </View>
   );
 };
