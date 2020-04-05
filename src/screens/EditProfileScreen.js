@@ -19,7 +19,7 @@ const EditProfileScreen = ({ navigation }) => {
     state: socialAccounts,
     fetchSocialAccounts,
     updateSocialAccounts,
-    updateSocialAccountsLocally,
+    editSocialAccount,
     removeSocialAccount
   } = useContext(SocialAccountContext);
   const [name, setName] = useState(currentUser.name);
@@ -38,7 +38,12 @@ const EditProfileScreen = ({ navigation }) => {
       />
       <Header
         leftComponent={
-          <TouchableOpacity onPress={() => navigation.navigate("FriendList")}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("FriendList");
+              fetchSocialAccounts({ userId: currentUser._id });
+            }}
+          >
             <Text>Cancel</Text>
           </TouchableOpacity>
         }
@@ -68,12 +73,11 @@ const EditProfileScreen = ({ navigation }) => {
         scrollEnabled={false}
         data={socialAccounts}
         keyExtractor={item => item._id}
-        renderItem={({ item: account }) => {
+        renderItem={({ item: socialAccount }) => {
           return (
             <EditableAccount
-              account={account}
-              updateSocialAccountsLocally={updateSocialAccountsLocally}
-              removeSocialAccount={removeSocialAccount}
+              socialAccount={socialAccount}
+              modifers={{ editSocialAccount, removeSocialAccount }}
             />
           );
         }}

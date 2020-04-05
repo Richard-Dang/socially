@@ -2,27 +2,25 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Input, SocialIcon, Icon } from "react-native-elements";
 
-const EditableAccount = ({
-  account,
-  updateSocialAccountsLocally,
-  removeSocialAccount
-}) => {
-  const [username, setUsername] = useState(account.username);
+const EditableAccount = ({ socialAccount, modifers }) => {
+  const [username, setUsername] = useState(socialAccount.username);
+  const { editSocialAccount, removeSocialAccount } = modifers;
 
   return (
     <View style={styles.container}>
       <SocialIcon
         iconSize={16}
-        type={account.accountType}
+        type={socialAccount.accountType}
         raised={false}
         style={styles.icon}
       />
       <Input
         inputContainerStyle={styles.inputBox}
-        // TODO: Create onPress handler to remove social media account
         rightIcon={
           <TouchableOpacity
-            onPress={() => removeSocialAccount({ accountId: account._id })}
+            onPress={() => {
+              removeSocialAccount({ socialAccount });
+            }}
           >
             <Icon type="material" name="cancel" />
           </TouchableOpacity>
@@ -30,9 +28,9 @@ const EditableAccount = ({
         value={username}
         onChangeText={newUsername => {
           setUsername(newUsername);
-          const updatedAccount = account;
+          const updatedAccount = socialAccount;
           updatedAccount.username = newUsername;
-          updateSocialAccountsLocally(updatedAccount);
+          editSocialAccount({ updatedAccount });
         }}
       />
       {/* TODO: Add dropdown for adding accounts */}

@@ -13,7 +13,7 @@ const SearchUserListItem = ({ user }) => {
         <TouchableOpacity
           onPress={async () => {
             try {
-              await sociallyApi.post("/addfriend", { friendId: user._id });
+              await sociallyApi.post("/friends", { friendId: user._id });
               setFriendAdded(true);
             } catch (err) {
               console.log(err);

@@ -23,7 +23,7 @@ const fetchFriends = dispatch => async () => {
 
 const removeFriend = dispatch => async (friendId, callback) => {
   try {
-    await sociallyApi.post("/removefriend", { friendId });
+    await sociallyApi.delete("/friends", { data: { friendId } });
     dispatch({ type: "remove_friend", payload: friendId });
     if (callback) callback();
   } catch (err) {

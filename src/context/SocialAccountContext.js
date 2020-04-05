@@ -7,7 +7,7 @@ const socialAccountReducer = (state, action) => {
       return action.payload;
     case "clear_social_accounts":
       return [];
-    case "update_social_accounts":
+    case "edit_social_accounts":
       return state.map(socialAccount =>
         socialAccount._id === action.payload._id
           ? action.payload
@@ -15,7 +15,7 @@ const socialAccountReducer = (state, action) => {
       );
     case "remove_social_account":
       return state.filter(
-        socialAccount => socialAccount._id !== action.payload
+        socialAccount => socialAccount._id !== action.payload._id
       );
     default:
       return state;
@@ -24,7 +24,9 @@ const socialAccountReducer = (state, action) => {
 
 const fetchSocialAccounts = dispatch => async ({ userId }) => {
   try {
-    const response = await sociallyApi.post("/socialaccounts", { userId });
+    const response = await sociallyApi.get("/socialaccounts", {
+      params: { userId }
+    });
     dispatch({ type: "fetch_social_accounts", payload: response.data });
   } catch (err) {
     console.log(err);
@@ -35,8 +37,12 @@ const clearSocialAccounts = dispatch => () => {
   dispatch({ type: "clear_social_accounts" });
 };
 
-const updateSocialAccountsLocally = dispatch => async socialAccount => {
-  dispatch({ type: "update_social_accounts", payload: socialAccount });
+const editSocialAccount = dispatch => async ({ socialAccount }) => {
+  dispatch({ type: "edit_social_account", payload: socialAccount });
+};
+
+const removeSocialAccount = dispatch => async ({ socialAccount }) => {
+  dispatch({ type: "remove_social_account", payload: socialAccount });
 };
 
 const updateSocialAccounts = dispatch => async ({ socialAccounts }) => {
@@ -51,26 +57,12 @@ const updateSocialAccounts = dispatch => async ({ socialAccounts }) => {
   }
 };
 
-const removeSocialAccount = dispatch => async ({ accountId }) => {
-  console.log(accountId);
-  try {
-    await sociallyApi.delete("/socialaccounts", {
-      data: {
-        accountId
-      }
-    });
-    dispatch({ type: "remove_social_account", payload: accountId });
-  } catch (err) {
-    console.log(err.response.data);
-  }
-};
-
 export const { Provider, Context } = createDataContext(
   socialAccountReducer,
   {
     fetchSocialAccounts,
     clearSocialAccounts,
-    updateSocialAccountsLocally,
+    editSocialAccount,
     updateSocialAccounts,
     removeSocialAccount
   },
