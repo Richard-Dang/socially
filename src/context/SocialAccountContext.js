@@ -31,12 +31,17 @@ const clearSocialAccounts = dispatch => () => {
   dispatch({ type: "clear_social_accounts" });
 };
 
-const updateSocialAccounts = dispatch => async ({ socialAccount }) => {
+const updateSocialAccountsLocally = dispatch => async socialAccount => {
+  dispatch({ type: "update_social_accounts", payload: socialAccount });
+};
+
+const updateSocialAccounts = dispatch => async ({ socialAccounts }) => {
   try {
     const response = await sociallyApi.put("/socialaccounts", {
-      socialAccount
+      socialAccounts
     });
-    dispatch({ type: "update_social_accounts", payload: response.data });
+
+    dispatch({ type: "fetch_social_accounts", payload: response.data });
   } catch (err) {
     console.log(err.response.data);
   }
@@ -44,6 +49,11 @@ const updateSocialAccounts = dispatch => async ({ socialAccount }) => {
 
 export const { Provider, Context } = createDataContext(
   socialAccountReducer,
-  { fetchSocialAccounts, clearSocialAccounts, updateSocialAccounts },
+  {
+    fetchSocialAccounts,
+    clearSocialAccounts,
+    updateSocialAccountsLocally,
+    updateSocialAccounts
+  },
   []
 );

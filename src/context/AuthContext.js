@@ -72,7 +72,7 @@ const logout = dispatch => async () => {
 };
 
 // TODO: Probably want to refactor this method into a different context
-const updateUser = dispatch => async (name, bio) => {
+const updateUser = dispatch => async ({name, bio}) => {
   try {
     const response = await sociallyApi.put("/user", { name, bio });
 

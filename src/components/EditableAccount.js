@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Input, SocialIcon } from "react-native-elements";
 
-const EditableAccount = ({ account, accountsState }) => {
+const EditableAccount = ({ account, updateSocialAccountsLocally }) => {
+  const [username, setUsername] = useState(account.username);
+
   return (
     <View style={styles.container}>
       <SocialIcon
@@ -15,15 +17,12 @@ const EditableAccount = ({ account, accountsState }) => {
         inputContainerStyle={styles.inputBox}
         // TODO: Create onPress handler to remove social media account
         rightIcon={{ type: "material", name: "cancel" }}
-        value={account.username}
-        onChangeText={(newUsername) => {
-          // TODO: this is a pretty disguisting way of updated state...
-          const { accounts, setAccounts } = accountsState;
-          account.username = newUsername;
-          const updatedAccounts = accounts.map(a =>
-            a._id === account._id ? account : a
-          );
-          setAccounts(updatedAccounts);
+        value={username}
+        onChangeText={newUsername => {
+          setUsername(newUsername);
+          const updatedAccount = account;
+          updatedAccount.username = newUsername;
+          updateSocialAccountsLocally(updatedAccount);
         }}
       />
     </View>

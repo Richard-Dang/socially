@@ -18,17 +18,15 @@ const EditProfileScreen = ({ navigation }) => {
   const {
     state: socialAccounts,
     fetchSocialAccounts,
-    updateSocialAccounts
+    updateSocialAccounts,
+    updateSocialAccountsLocally
   } = useContext(SocialAccountContext);
   const [name, setName] = useState(currentUser.name);
   const [bio, setBio] = useState(currentUser.bio);
-  const [accounts, setAccounts] = useState(socialAccounts);
-
-  console.log(accounts);
 
   const updateProfile = callback => {
-    updateUser(name, bio);
-    updateSocialAccounts(accounts);
+    updateUser({ name, bio });
+    updateSocialAccounts({ socialAccounts });
     if (callback) callback();
   };
 
@@ -67,13 +65,13 @@ const EditProfileScreen = ({ navigation }) => {
 
       <FlatList
         scrollEnabled={false}
-        data={accounts}
+        data={socialAccounts}
         keyExtractor={item => item._id}
         renderItem={({ item: account }) => {
           return (
             <EditableAccount
               account={account}
-              accountsState={{ accounts, setAccounts }}
+              updateSocialAccountsLocally={updateSocialAccountsLocally}
             />
           );
         }}
