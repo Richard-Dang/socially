@@ -13,7 +13,7 @@ const RegisterScreen = ({ navigation }) => {
   const { register } = useContext(AuthContext);
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <Icon
         containerStyle={GlobalStyles.backButton}
         name="back"
@@ -28,6 +28,7 @@ const RegisterScreen = ({ navigation }) => {
         autoCorrect={false}
         value={email}
         onChangeText={setEmail}
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       <Input
         placeholder="Username"
@@ -35,6 +36,7 @@ const RegisterScreen = ({ navigation }) => {
         autoCorrect={false}
         value={username}
         onChangeText={setUsername}
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       <Input
         placeholder="Full Name"
@@ -42,6 +44,7 @@ const RegisterScreen = ({ navigation }) => {
         autoCorrect={false}
         value={name}
         onChangeText={setName}
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       <Input
         placeholder="Password"
@@ -50,11 +53,13 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       {/* TODO: Add error messages for failed login and field validation */}
       <Button
         title="Sign up"
         onPress={() => register({ email, username, name, password })}
+        style={styles.button}
       />
     </SafeAreaView>
   );
@@ -68,4 +73,10 @@ RegisterScreen.navigationOptions = () => {
 
 export default RegisterScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1
+  },
+  button: { margin: 15 }
+});

@@ -87,6 +87,7 @@ const EditProfileScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.dropdownContainer}>
+        {/* TODO: Implement adding account logic */}
         <RNPickerSelect
           Icon={() => {
             return (

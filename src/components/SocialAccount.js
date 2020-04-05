@@ -36,7 +36,7 @@ export default SocialAccount;
 const styles = StyleSheet.create({
   socialButton: {
     width: 300,
-    height: 70
+    height: 60
   },
   buttonFont: {
     fontSize: 20

@@ -51,13 +51,13 @@ const FriendDetailScreen = ({ navigation }) => {
           source={{ uri: getAvatarUrl(user.email) }}
           containerStyle={styles.profileImage}
         />
-        <Text h2 style={styles.name}>
+        <Text h3 style={styles.name}>
           {user.name}
         </Text>
         <Text style={styles.bio}>{user.bio}</Text>
         <FlatList
-          scrollEnabled={false}
-          data={socialAccounts}
+          // scrollEnabled={false}
+          data={socialAccounts.sort((a, b) => a.accountType.localeCompare(b.accountType))}
           keyExtractor={item => item._id}
           renderItem={({ item: socialAccount }) => {
             return (
@@ -100,10 +100,12 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   profileImage: {
-    marginTop: 20
+    // marginTop: 0
   },
   name: {
-    fontWeight: "500"
+    fontWeight: "500",
+    marginTop: 20,
+    marginBottom: 10
   },
   bio: {
     marginBottom: 20,

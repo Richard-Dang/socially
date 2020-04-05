@@ -23,6 +23,8 @@ const SearchScreen = ({ isFocused }) => {
           setTerm(term);
           searchUsers(term);
         }}
+        containerStyle={styles.searchBarContainer}
+        inputContainerStyle={styles.searchBarInput}
       />
       <FlatList
         data={results}
@@ -39,4 +41,14 @@ SearchScreen.navigationOptions = {
 
 export default withNavigationFocus(SearchScreen);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  searchBarContainer: {
+    backgroundColor: "white"
+  },
+  searchBarInput: {
+    borderWidth: 3,
+    borderBottomWidth: 3,
+    borderColor: "black",
+    backgroundColor: "white"
+  }
+});

@@ -30,7 +30,7 @@ const FriendListScreen = ({ navigation }) => {
             navigation.navigate("EditProfile");
           }}
         >
-          <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} />
+          <Avatar rounded source={{ uri: getAvatarUrl(currentUser.email) }} size={40} />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     position: "absolute",
-    top: 20,
-    right: 20
+    top: 35,
+    right: 30
   }
 });

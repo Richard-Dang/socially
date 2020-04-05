@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
   const { login } = useContext(AuthContext);
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <Icon
         containerStyle={GlobalStyles.backButton}
         name="back"
@@ -25,6 +25,7 @@ const LoginScreen = ({ navigation }) => {
         autoCorrect={false}
         value={email}
         onChangeText={setEmail}
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       <Input
         placeholder="Password"
@@ -33,9 +34,14 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        inputContainerStyle={GlobalStyles.inputContainer}
       />
       {/* TODO: Add error messages for failed login and field validation */}
-      <Button title="Log in" onPress={() => login({ email, password })} />
+      <Button
+        title="Log in"
+        onPress={() => login({ email, password })}
+        style={styles.button}
+      />
     </SafeAreaView>
   );
 };
@@ -48,4 +54,10 @@ LoginScreen.navigationOptions = () => {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    flex: 1
+  },
+  button: { margin: 15 }
+});

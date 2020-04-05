@@ -10,7 +10,7 @@ const theme = {
   },
   Text: {
     h2Style: {
-      margin: 15,
+      marginVertical: 30,
       marginLeft: 30
     }
   },
