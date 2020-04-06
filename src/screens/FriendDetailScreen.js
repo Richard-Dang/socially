@@ -16,9 +16,9 @@ const FriendDetailScreen = ({ navigation }) => {
     state: { currentUser },
   } = useContext(AuthContext);
   const {
-    state: socialAccounts,
+    state: { socialAccounts },
     fetchSocialAccounts,
-    clearSocialAccounts,
+    // clearSocialAccounts,
   } = useContext(SocialAccountContext);
 
   // If _id is null then show current user profile
@@ -31,7 +31,7 @@ const FriendDetailScreen = ({ navigation }) => {
       <NavigationEvents
         onWillFocus={() => fetchSocialAccounts({ userId: user._id })}
         // TODO: onWillBlur currently not working for some reason
-        onWillBlur={clearSocialAccounts}
+        // onWillBlur={clearSocialAccounts}
       />
       {_id ? (
         <Icon

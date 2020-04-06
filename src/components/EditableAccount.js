@@ -26,14 +26,15 @@ const EditableAccount = ({ socialAccount, modifers }) => {
           </TouchableOpacity>
         }
         value={username}
-        onChangeText={newUsername => {
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={(newUsername) => {
           setUsername(newUsername);
           const updatedAccount = socialAccount;
           updatedAccount.username = newUsername;
           editSocialAccount({ updatedAccount });
         }}
       />
-      {/* TODO: Add dropdown for adding accounts */}
     </View>
   );
 };
@@ -42,15 +43,15 @@ export default EditableAccount;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row"
+    flexDirection: "row",
     // borderColor: "red",
     // borderWidth: 5
   },
   icon: {
-    marginLeft: 50
+    marginLeft: 50,
   },
   inputBox: {
     margin: 0,
-    width: "60%"
-  }
+    width: "60%",
+  },
 });

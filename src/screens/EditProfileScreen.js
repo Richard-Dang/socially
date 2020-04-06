@@ -14,22 +14,34 @@ const EditProfileScreen = ({ navigation }) => {
   const {
     state: { currentUser },
     updateUser,
-    logout
+    logout,
   } = useContext(AuthContext);
   const {
-    state: socialAccounts,
+    state: { socialAccounts, unusedAccountTypes },
     fetchSocialAccounts,
     updateSocialAccounts,
     editSocialAccount,
-    removeSocialAccount
+    removeSocialAccount,
+    addSocialAccount,
   } = useContext(SocialAccountContext);
   const [name, setName] = useState(currentUser.name);
   const [bio, setBio] = useState(currentUser.bio);
+  const [dropDownItem, setDropDownItem] = useState(null);
 
-  const updateProfile = callback => {
+  const updateProfile = (callback) => {
     updateUser({ name, bio });
     updateSocialAccounts({ socialAccounts });
     if (callback) callback();
+  };
+
+  const getDropDownItems = () => {
+    // TODO: Look into duplicate key warning
+    return unusedAccountTypes
+      ? unusedAccountTypes.map((u) => {
+          const label = u.charAt(0).toUpperCase() + u.slice(1);
+          return { label, value: u };
+        })
+      : [];
   };
 
   return (
@@ -74,7 +86,7 @@ const EditProfileScreen = ({ navigation }) => {
         <FlatList
           scrollEnabled={false}
           data={socialAccounts}
-          keyExtractor={item => item._id}
+          keyExtractor={(item) => item._id}
           renderItem={({ item: socialAccount }) => {
             return (
               <EditableAccount
@@ -87,24 +99,28 @@ const EditProfileScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.dropdownContainer}>
-        {/* TODO: Implement adding account logic */}
         <RNPickerSelect
-          Icon={() => {
-            return (
-              <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
-            );
-          }}
+          Icon={() => (
+            <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
+          )}
           style={dropdownStyle}
           placeholder={{
             label: "Add account",
-            value: null
+            value: null,
           }}
-          onValueChange={value => console.log(value)}
-          items={[
-            { label: "Football", value: "football" },
-            { label: "Baseball", value: "baseball" },
-            { label: "Hockey", value: "hockey" }
-          ]}
+          value={dropDownItem}
+          onValueChange={(value) => {
+            setDropDownItem(value);
+          }}
+          onDonePress={() => {
+            addSocialAccount({
+              accountType: dropDownItem,
+              userId: currentUser._id,
+            });
+            setDropDownItem(null);
+          }}
+          items={getDropDownItems()}
+          doneText="Add"
         />
       </View>
 
@@ -121,43 +137,43 @@ const dropdownStyle = StyleSheet.create({
   inputIOS: {
     marginTop: 15,
     marginBottom: 7,
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
     // borderColor: "red",
     // borderWidth: 5
   },
   profileImage: {
     alignSelf: "center",
     marginTop: 20,
-    marginBottom: 30
+    marginBottom: 30,
   },
   accountLabel: {
     fontSize: 18,
     marginLeft: 30,
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   logoutButtonContainer: {
     position: "absolute",
     bottom: 30,
     alignSelf: "center",
-    width: "90%"
+    width: "90%",
   },
   headerText: {
     fontSize: 20,
-    marginTop: 10
+    marginTop: 10,
   },
   dropdownContainer: {
     marginRight: 10,
     marginLeft: 104,
     borderBottomColor: "gray",
     borderBottomWidth: 1,
-    width: "57%"
+    width: "57%",
   },
-  addIcon: { marginTop: 13 }
+  addIcon: { marginTop: 13 },
 });

@@ -3,16 +3,21 @@ import { StyleSheet, View, Linking } from "react-native";
 import { SocialIcon } from "react-native-elements";
 
 const openUrl = (accountType, username) => async () => {
-  switch (accountType) {
-    case "facebook":
-      return await Linking.openURL(`https://www.facebook.com/${username}`);
-    case "instagram":
-      return await Linking.openURL(`https://www.instagram.com/${username}`);
-    case "linkedin":
-      return await Linking.openURL(`https://www.linkedin.com/in/${username}`);
-    default:
-      return null;
-  }
+  const accountTypeDict = {
+    facebook: "https://www.facebook.com/",
+    instagram: "https://www.instagram.com/",
+    linkedin: "https://www.linkedin.com/in/",
+    twitter: "https://twitter.com/",
+    twitch: "https://www.twitch.tv",
+    steam: "https://steamcommunity.com/id/",
+    soundcloud: "https://soundcloud.com/",
+    github: "https://github.com/",
+    flickr: "https://www.flickr.com/photos/",
+  };
+
+  const link = accountTypeDict[accountType] + username;
+
+  return link ? Linking.openURL(link) : null;
 };
 
 const SocialAccount = ({ accountType, username }) => {
@@ -36,13 +41,12 @@ export default SocialAccount;
 const styles = StyleSheet.create({
   socialButton: {
     width: 300,
-    height: 60
+    height: 60,
   },
   buttonFont: {
-    fontSize: 20
+    fontSize: 20,
   },
   buttonIcon: {
-    marginRight: 20
+    marginRight: 20,
   },
-
 });
