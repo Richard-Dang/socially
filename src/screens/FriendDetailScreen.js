@@ -57,7 +57,7 @@ const FriendDetailScreen = ({ navigation }) => {
         <Text style={styles.bio}>{user.bio}</Text>
         <View style={styles.accountsContainer}>
           <FlatList
-            // scrollEnabled={false}
+            showsVerticalScrollIndicator={false}
             data={socialAccounts.sort((a, b) =>
               a.accountType.localeCompare(b.accountType)
             )}

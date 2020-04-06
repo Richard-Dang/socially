@@ -17,14 +17,20 @@ import SplashScreen from "./src/screens/SplashScreen";
 import theme from "./src/styles/Theme";
 import { Provider as FriendProvider } from "./src/context/FriendContext";
 import { Provider as SocialAccountProvider } from "./src/context/SocialAccountContext";
+import { YellowBox } from "react-native";
+
+YellowBox.ignoreWarnings([
+  "VirtualizedLists should never be nested", // TODO: Remove when fixed
+  'Warning: Each child in a list should have a unique "key" prop',
+]);
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,
-  FriendDetail: FriendDetailScreen
+  FriendDetail: FriendDetailScreen,
 });
 
 friendListFlow.navigationOptions = {
-  tabBarIcon: <Icon name="home" type="feather" />
+  tabBarIcon: <Icon name="home" type="feather" />,
 };
 
 const switchNavigator = createSwitchNavigator(
@@ -33,17 +39,17 @@ const switchNavigator = createSwitchNavigator(
     loginFlow: createStackNavigator({
       Splash: SplashScreen,
       Register: RegisterScreen,
-      Login: LoginScreen
+      Login: LoginScreen,
     }),
     mainFlow: createBottomTabNavigator(
       {
         Search: SearchScreen,
         friendListFlow: friendListFlow,
-        ShowProfile: FriendDetailScreen
+        ShowProfile: FriendDetailScreen,
       },
       { tabBarOptions: { showLabel: false } }
     ),
-    EditProfile: EditProfileScreen
+    EditProfile: EditProfileScreen,
   },
   { initialRouteName: "ResolveAuth" }
 );
@@ -58,7 +64,7 @@ export default () => {
           <AuthProvider>
             <StatusBar barStyle="dark-content" />
             <App
-              ref={navigator => {
+              ref={(navigator) => {
                 setNavigator(navigator);
               }}
             />

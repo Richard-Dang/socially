@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, ScrollView } from "react-native";
 import { Avatar, Button, Header, Icon, Text } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
 import EditableAccount from "../components/EditableAccount";
@@ -82,46 +82,47 @@ const EditProfileScreen = ({ navigation }) => {
       {/* TODO: Properly align input fields */}
       <EditableField fieldName="Bio     " setField={setBio} value={bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
-      <View>
-        <FlatList
-          scrollEnabled={false}
-          data={socialAccounts}
-          keyExtractor={(item) => item._id}
-          renderItem={({ item: socialAccount }) => {
-            return (
-              <EditableAccount
-                socialAccount={socialAccount}
-                modifers={{ editSocialAccount, removeSocialAccount }}
-              />
-            );
-          }}
-        />
-      </View>
-
-      <View style={styles.dropdownContainer}>
-        <RNPickerSelect
-          Icon={() => (
-            <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
-          )}
-          style={dropdownStyle}
-          placeholder={{
-            label: "Add account",
-            value: null,
-          }}
-          value={dropDownItem}
-          onValueChange={(value) => {
-            setDropDownItem(value);
-          }}
-          onDonePress={() => {
-            addSocialAccount({
-              accountType: dropDownItem,
-              userId: currentUser._id,
-            });
-            setDropDownItem(null);
-          }}
-          items={dropDownItems}
-          doneText="Add"
-        />
+      <View style={styles.accountsListContainer}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FlatList
+            scrollEnabled={false}
+            data={socialAccounts}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item: socialAccount }) => {
+              return (
+                <EditableAccount
+                  socialAccount={socialAccount}
+                  modifers={{ editSocialAccount, removeSocialAccount }}
+                />
+              );
+            }}
+          />
+          <View style={styles.dropdownContainer}>
+            <RNPickerSelect
+              Icon={() => (
+                <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
+              )}
+              style={dropdownStyle}
+              placeholder={{
+                label: "Add account",
+                value: null,
+              }}
+              value={dropDownItem}
+              onValueChange={(value) => {
+                setDropDownItem(value);
+              }}
+              onDonePress={() => {
+                addSocialAccount({
+                  accountType: dropDownItem,
+                  userId: currentUser._id,
+                });
+                setDropDownItem(null);
+              }}
+              items={dropDownItems}
+              doneText="Add"
+            />
+          </View>
+        </ScrollView>
       </View>
 
       <View style={styles.logoutButtonContainer}>
@@ -176,4 +177,7 @@ const styles = StyleSheet.create({
     width: "57%",
   },
   addIcon: { marginTop: 13 },
+  accountsListContainer: {
+    height: 350,
+  },
 });
