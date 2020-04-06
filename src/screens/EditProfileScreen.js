@@ -34,15 +34,15 @@ const EditProfileScreen = ({ navigation }) => {
     if (callback) callback();
   };
 
-  const getDropDownItems = () => {
-    // TODO: Look into duplicate key warning
-    return unusedAccountTypes
-      ? unusedAccountTypes.map((u) => {
-          const label = u.charAt(0).toUpperCase() + u.slice(1);
-          return { label, value: u };
-        })
-      : [];
-  };
+  // TODO: Fix duplicate key warning
+  const dropDownItems = unusedAccountTypes
+    ? unusedAccountTypes.map((u) => {
+        return {
+          label: u.charAt(0).toUpperCase() + u.slice(1),
+          value: u,
+        };
+      })
+    : [];
 
   return (
     <View style={styles.container}>
@@ -119,7 +119,7 @@ const EditProfileScreen = ({ navigation }) => {
             });
             setDropDownItem(null);
           }}
-          items={getDropDownItems()}
+          items={dropDownItems}
           doneText="Add"
         />
       </View>
