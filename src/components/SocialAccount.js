@@ -8,7 +8,7 @@ const openUrl = (accountType, username) => async () => {
     instagram: "https://www.instagram.com/",
     linkedin: "https://www.linkedin.com/in/",
     twitter: "https://twitter.com/",
-    twitch: "https://www.twitch.tv",
+    twitch: "https://www.twitch.tv/",
     steam: "https://steamcommunity.com/id/",
     soundcloud: "https://soundcloud.com/",
     github: "https://github.com/",
