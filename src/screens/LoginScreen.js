@@ -41,6 +41,7 @@ const LoginScreen = ({ navigation }) => {
         inputContainerStyle={GlobalStyles.inputContainer}
       />
       {/* TODO: Add error messages for failed login and field validation */}
+      {/* TODO: Adding loading to button during API request by using state */}
       <Button
         title="Log in"
         onPress={() => login({ email, password })}
@@ -52,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
 
 LoginScreen.navigationOptions = () => {
   return {
-    headerShown: false
+    headerShown: false,
   };
 };
 
@@ -61,7 +62,7 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    flex: 1
+    flex: 1,
   },
-  button: { margin: wp("4%") }
+  button: { margin: wp("4%") },
 });
