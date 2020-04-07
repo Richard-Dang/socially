@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     position: "absolute",
-    top: hp("3%"),
+    top: hp("2%"),
     right: wp("7%"),
   },
 });

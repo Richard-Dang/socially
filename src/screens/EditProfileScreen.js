@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   addIcon: { marginTop: hp("1%") },
   accountsListContainer: {
-    height: hp("38%"),
+    height: hp("35%"),
     marginLeft: wp("5%")
   },
 });

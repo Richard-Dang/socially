@@ -15,9 +15,9 @@ const theme = {
   },
   Text: {
     h2Style: {
-      marginVertical: hp("3%"),
+      marginVertical: hp("2%"),
       marginLeft: wp("5%"),
-      fontSize: wp("10%"),
+      fontSize: hp("4%"),
     },
   },
   Input: {
