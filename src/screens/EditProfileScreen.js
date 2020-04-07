@@ -87,20 +87,22 @@ const EditProfileScreen = ({ navigation }) => {
       <EditableField fieldName="Bio     " setField={setBio} value={bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
       <View style={styles.accountsListContainer}>
-        <FlatList
-          scrollEnabled
-          showsVerticalScrollIndicator={false}
-          data={socialAccounts}
-          keyExtractor={(item) => item._id}
-          renderItem={({ item: socialAccount }) => {
-            return (
-              <EditableAccount
-                socialAccount={socialAccount}
-                modifers={{ editSocialAccount, removeSocialAccount }}
-              />
-            );
-          }}
-        />
+        {socialAccounts.length === 0 ? null : (
+          <FlatList
+            scrollEnabled
+            showsVerticalScrollIndicator={false}
+            data={socialAccounts}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item: socialAccount }) => {
+              return (
+                <EditableAccount
+                  socialAccount={socialAccount}
+                  modifers={{ editSocialAccount, removeSocialAccount }}
+                />
+              );
+            }}
+          />
+        )}
         <View style={styles.dropdownContainer}>
           <RNPickerSelect
             Icon={() => (

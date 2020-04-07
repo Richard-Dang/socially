@@ -15,7 +15,7 @@ const SearchScreen = ({ isFocused }) => {
   const [searchUsers, results] = useResults(isFocused);
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <Text h2>Search</Text>
       <SearchBar
         placeholder="Find Friends"
@@ -46,6 +46,11 @@ SearchScreen.navigationOptions = {
 export default withNavigationFocus(SearchScreen);
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // borderColor: "red",
+    // borderWidth: 5,
+  },
   searchBarContainer: {
     backgroundColor: "white",
   },
