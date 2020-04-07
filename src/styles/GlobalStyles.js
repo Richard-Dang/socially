@@ -1,18 +1,22 @@
 import { StyleSheet } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 export default StyleSheet.create({
   backButton: {
     alignSelf: "flex-start",
-    marginLeft: 20,
-    marginTop: 20
+    marginLeft: wp("5%"),
+    marginTop: hp("3%"),
   },
   inputContainer: {
-    borderWidth: 3,
-    borderBottomWidth: 3,
+    borderWidth: wp("1%"),
+    borderBottomWidth: wp("1%"),
     borderColor: "black",
     backgroundColor: "white",
-    paddingLeft: 10,
-    marginHorizontal: 20,
-    marginVertical: 10
-  }
+    paddingLeft: wp("3%"),
+    marginHorizontal: wp("4.5%"),
+    marginVertical: hp("1%"),
+  },
 });

@@ -5,6 +5,10 @@ import { SafeAreaView, withNavigationFocus } from "react-navigation";
 import useResults from "../hooks/useResults";
 import { FlatList } from "react-native-gesture-handler";
 import SearchUserListItem from "../components/SearchUserListItem";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const SearchScreen = ({ isFocused }) => {
   const [term, setTerm] = useState("");
@@ -19,7 +23,7 @@ const SearchScreen = ({ isFocused }) => {
         autoCapitalize="none"
         autoCorrect={false}
         lightTheme
-        onChangeText={term => {
+        onChangeText={(term) => {
           setTerm(term);
           searchUsers(term);
         }}
@@ -28,7 +32,7 @@ const SearchScreen = ({ isFocused }) => {
       />
       <FlatList
         data={results}
-        keyExtractor={item => item._id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item: user }) => <SearchUserListItem user={user} />}
       />
     </SafeAreaView>
@@ -36,19 +40,19 @@ const SearchScreen = ({ isFocused }) => {
 };
 
 SearchScreen.navigationOptions = {
-  tabBarIcon: <Icon name="search" type="feather" />
+  tabBarIcon: <Icon name="search" type="feather" />,
 };
 
 export default withNavigationFocus(SearchScreen);
 
 const styles = StyleSheet.create({
   searchBarContainer: {
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   searchBarInput: {
-    borderWidth: 3,
-    borderBottomWidth: 3,
+    borderWidth: hp("0.5%"),
+    borderBottomWidth: hp("0.5%"),
     borderColor: "black",
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 });

@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Input, Icon } from "react-native-elements";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const EditableField = ({ fieldName, setField, value }) => {
   return (
@@ -24,12 +28,12 @@ const styles = StyleSheet.create({
     // borderWidth: 5
   },
   inputContainer: {
-    marginTop: -15,
-    marginBottom: 20,
-    width: "60%"
+    marginTop: hp("-1%"),
+    marginBottom: hp("2%"),
+    width: wp("60%")
   },
   fieldName: {
-    fontSize: 18,
-    marginLeft: 30
+    fontSize: wp("5%"),
+    marginLeft: wp("7%"),
   }
 });

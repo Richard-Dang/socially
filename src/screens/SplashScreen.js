@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, View, ImageBackground } from "react-native";
 import { Button, Text, Icon } from "react-native-elements";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const SplashScreen = ({ navigation }) => {
   return (
@@ -10,15 +14,7 @@ const SplashScreen = ({ navigation }) => {
         style={styles.image}
       >
         <View style={styles.appNameContainer}>
-          <Icon
-            name="social-myspace"
-            type="foundation"
-            size={50}
-            iconStyle={styles.iconStyle}
-          />
-          <Text h2 style={styles.appName}>
-            Socially
-          </Text>
+          <Text style={styles.appName}>Socially</Text>
         </View>
         <View style={styles.buttonLayout}>
           <View style={styles.buttonContainer}>
@@ -41,7 +37,7 @@ const SplashScreen = ({ navigation }) => {
 
 SplashScreen.navigationOptions = () => {
   return {
-    headerShown: false
+    headerShown: false,
   };
 };
 
@@ -51,32 +47,28 @@ const styles = StyleSheet.create({
   container: {
     // borderColor: "red",
     // borderWidth: 5,
-    flex: 1
+    flex: 1,
   },
-  appName: { fontWeight: "500" },
+  appName: { fontWeight: "400", fontSize: wp("15%") },
   buttonLayout: {
-    // borderColor: "red",
-    // borderWidth: 5,
     backgroundColor: "white",
     flexDirection: "row",
     position: "absolute",
-    bottom: 0
+    bottom: 0,
   },
   buttonContainer: {
     flex: 1,
-    marginBottom: 20
+    marginTop: hp("1%"),
+    marginBottom: hp("2%"),
   },
   image: {
     flex: 1,
     resizeMode: "stretch",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   appNameContainer: {
     flexDirection: "row",
     alignSelf: "center",
-    marginBottom: 300
+    marginBottom: hp("40%"),
   },
-  iconStyle: {
-    marginTop: 30
-  }
 });

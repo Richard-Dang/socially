@@ -3,6 +3,10 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { ListItem } from "react-native-elements";
 import { getAvatarUrl } from "../helpers/gravatar";
 import { withNavigation } from "react-navigation";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const FriendListItem = ({ friend, navigation }) => {
   return (
@@ -12,15 +16,15 @@ const FriendListItem = ({ friend, navigation }) => {
       }}
     >
       <ListItem
-        chevron={{ size: 25, color: "black" }}
+        chevron={{ size: wp("8%"), color: "black" }}
         title={friend.name}
         subtitle={friend.bio ? friend.bio : null}
         leftAvatar={{
           source: {
-            uri: getAvatarUrl(friend.email)
+            uri: getAvatarUrl(friend.email),
           },
-          size: 70,
-          containerStyle: styles.listItemAvatar
+          size: hp("8%"),
+          containerStyle: styles.listItemAvatar,
         }}
         bottomDivider
         topDivider
@@ -35,13 +39,14 @@ export default withNavigation(FriendListItem);
 
 const styles = StyleSheet.create({
   listItemTitle: {
-    fontSize: 25
+    fontSize: wp("6%"),
   },
   listItemSubtitle: {
-    marginTop: 5
+    fontSize: wp("3.5%"),
+    marginTop: hp("0.5%"),
   },
   listItemAvatar: {
-    marginLeft: 20,
-    marginRight: 15
-  }
+    marginLeft: wp("6%"),
+    marginRight: wp("5%"),
+  },
 });

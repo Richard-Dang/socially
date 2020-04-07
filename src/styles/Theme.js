@@ -1,27 +1,33 @@
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 const theme = {
   Button: {
     titleStyle: {
-      textTransform: "uppercase"
+      textTransform: "uppercase",
     },
     buttonStyle: {
       backgroundColor: "black",
-      margin: 15
-    }
+      margin: wp("3%"),
+    },
   },
   Text: {
     h2Style: {
-      marginVertical: 30,
-      marginLeft: 30
-    }
+      marginVertical: hp("3%"),
+      marginLeft: wp("5%"),
+      fontSize: wp("10%"),
+    },
   },
   Input: {
     inputContainerStyle: {
-      margin: 15
-    }
+      margin: wp("3%"),
+    },
   },
   Header: {
-    backgroundColor: "white"
-  }
+    backgroundColor: "white",
+  },
 };
 
 export default theme;

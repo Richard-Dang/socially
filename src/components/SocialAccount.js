@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Linking } from "react-native";
 import { SocialIcon } from "react-native-elements";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const openUrl = (accountType, username) => async () => {
   const accountTypeDict = {
@@ -30,7 +34,7 @@ const SocialAccount = ({ accountType, username }) => {
       style={styles.socialButton}
       onPress={openUrl(accountType, username)}
       fontStyle={styles.buttonFont}
-      iconSize={35}
+      iconSize={hp("3%")}
       iconStyle={styles.buttonIcon}
     />
   );
@@ -40,13 +44,13 @@ export default SocialAccount;
 
 const styles = StyleSheet.create({
   socialButton: {
-    width: 300,
-    height: 60,
+    width: wp("70%"),
+    height: hp("7%"),
   },
   buttonFont: {
-    fontSize: 20,
+    fontSize: wp("4%"),
   },
   buttonIcon: {
-    marginRight: 20,
+    marginRight: wp("4%"),
   },
 });

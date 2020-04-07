@@ -9,6 +9,10 @@ import { SafeAreaView } from "react-navigation";
 import GlobalStyles from "../styles/GlobalStyles";
 import SocialAccount from "../components/SocialAccount";
 import { NavigationEvents } from "react-navigation";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const FriendDetailScreen = ({ navigation }) => {
   const { state: friends, removeFriend } = useContext(FriendContext);
@@ -47,13 +51,10 @@ const FriendDetailScreen = ({ navigation }) => {
       <View style={styles.centerContainer}>
         <Avatar
           rounded
-          size={200}
+          size={hp("20%")}
           source={{ uri: getAvatarUrl(user.email) }}
-          containerStyle={styles.profileImage}
         />
-        <Text h3 style={styles.name}>
-          {user.name}
-        </Text>
+        <Text style={styles.name}>{user.name}</Text>
         <Text style={styles.bio}>{user.bio}</Text>
         <View style={styles.accountsContainer}>
           <FlatList
@@ -103,26 +104,23 @@ const styles = StyleSheet.create({
   centerContainer: {
     alignItems: "center",
   },
-  profileImage: {
-    // marginTop: 0
-  },
   name: {
     fontWeight: "500",
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: hp("2%"),
+    marginBottom: hp("1%"),
+    fontSize: wp("8%"),
   },
   bio: {
-    marginBottom: 20,
-    fontSize: 22,
+    marginBottom: hp("3%"),
+    fontSize: wp("6%"),
   },
   removeFriendButtonContainer: {
     position: "absolute",
-    bottom: 20,
-    width: "90%",
+    bottom: hp("1%"),
+    width: wp("90%"),
     alignSelf: "center",
   },
   accountsContainer: {
-    // TODO: Want to use % and flex box to support at screen sizes
-    height: 300,
+    height: hp("38%"),
   },
 });

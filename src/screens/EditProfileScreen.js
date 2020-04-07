@@ -9,6 +9,10 @@ import { Context as SocialAccountContext } from "../context/SocialAccountContext
 import { getAvatarUrl } from "../helpers/gravatar";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import RNPickerSelect from "react-native-picker-select";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const EditProfileScreen = ({ navigation }) => {
   const {
@@ -73,7 +77,7 @@ const EditProfileScreen = ({ navigation }) => {
       />
       <Avatar
         rounded
-        size="xlarge"
+        size={hp("13%")}
         source={{ uri: getAvatarUrl(currentUser.email) }}
         containerStyle={styles.profileImage}
       />
@@ -136,48 +140,45 @@ export default EditProfileScreen;
 
 const dropdownStyle = StyleSheet.create({
   inputIOS: {
-    marginTop: 15,
-    marginBottom: 7,
-    fontSize: 18,
+    marginTop: hp("1%"),
+    marginBottom: hp("1%"),
+    fontSize: wp("4%"),
   },
 });
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderColor: "red",
-    // borderWidth: 5
   },
   profileImage: {
     alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: hp("2%"),
+    marginBottom: hp("3%"),
   },
   accountLabel: {
-    fontSize: 18,
-    marginLeft: 30,
-    marginTop: 20,
-    marginBottom: 10,
+    fontSize: wp("5%"),
+    marginLeft: wp("7%"),
+    marginBottom: hp("2%"),
   },
   logoutButtonContainer: {
     position: "absolute",
-    bottom: 30,
+    bottom: hp("2%"),
     alignSelf: "center",
-    width: "90%",
+    width: wp("90%"),
   },
   headerText: {
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: wp("4%"),
+    marginTop: hp("1%"),
   },
   dropdownContainer: {
-    marginRight: 10,
-    marginLeft: 104,
+    // marginRight: wp("5%"),
+    marginLeft: wp("24%"),
     borderBottomColor: "gray",
     borderBottomWidth: 1,
-    width: "57%",
+    width: wp("60%"),
   },
-  addIcon: { marginTop: 13 },
+  addIcon: { marginTop: hp("1%") },
   accountsListContainer: {
-    height: 350,
+    height: hp("38%"),
   },
 });

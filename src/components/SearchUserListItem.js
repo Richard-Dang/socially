@@ -3,6 +3,10 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ListItem, Icon, Text } from "react-native-elements";
 import { getAvatarUrl } from "../helpers/gravatar";
 import sociallyApi from "../api/socially";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const SearchUserListItem = ({ user }) => {
   const [friendAdded, setFriendAdded] = useState(false);
@@ -23,7 +27,7 @@ const SearchUserListItem = ({ user }) => {
           <Icon
             type="material"
             name="person-add"
-            size={40}
+            size={hp("4%")}
             iconStyle={styles.addUserIcon}
           />
         </TouchableOpacity>
@@ -32,10 +36,10 @@ const SearchUserListItem = ({ user }) => {
       subtitle={`(${user.username})`}
       leftAvatar={{
         source: {
-          uri: getAvatarUrl(user.email)
+          uri: getAvatarUrl(user.email),
         },
-        size: 70,
-        containerStyle: styles.listItemAvatar
+        size: hp("8%"),
+        containerStyle: styles.listItemAvatar,
       }}
       bottomDivider
       topDivider
@@ -49,16 +53,17 @@ export default SearchUserListItem;
 
 const styles = StyleSheet.create({
   listItemTitle: {
-    fontSize: 25
+    fontSize: wp("6%"),
   },
   listItemSubtitle: {
-    marginTop: 5
+    fontSize: wp("3.5%"),
+    marginTop: hp("0.5%"),
   },
   listItemAvatar: {
-    marginLeft: 20,
-    marginRight: 15
+    marginLeft: wp("6%"),
+    marginRight: wp("5%"),
   },
   addUserIcon: {
-    marginRight: 15
-  }
+    marginRight: wp("3%"),
+  },
 });

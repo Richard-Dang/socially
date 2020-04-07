@@ -4,6 +4,10 @@ import { Button, Icon, Input, Text } from "react-native-elements";
 import { SafeAreaView } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
 import GlobalStyles from "../styles/GlobalStyles";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -59,5 +63,5 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1
   },
-  button: { margin: 15 }
+  button: { margin: wp("4%") }
 });

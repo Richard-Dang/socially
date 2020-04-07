@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Input, SocialIcon, Icon } from "react-native-elements";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const EditableAccount = ({ socialAccount, modifers }) => {
   const [username, setUsername] = useState(socialAccount.username);
@@ -9,7 +13,7 @@ const EditableAccount = ({ socialAccount, modifers }) => {
   return (
     <View style={styles.container}>
       <SocialIcon
-        iconSize={16}
+        iconSize={hp("2%")}
         type={socialAccount.accountType}
         raised={false}
         style={styles.icon}
@@ -44,14 +48,12 @@ export default EditableAccount;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    // borderColor: "red",
-    // borderWidth: 5
   },
   icon: {
-    marginLeft: 50,
+    marginLeft: wp("10%"),
   },
   inputBox: {
     margin: 0,
-    width: "60%",
+    width: wp("60%"),
   },
 });
