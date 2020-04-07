@@ -105,14 +105,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   name: {
-    fontWeight: "500",
     marginTop: hp("2%"),
     marginBottom: hp("1%"),
-    fontSize: wp("8%"),
+    fontSize: wp("9%"),
   },
   bio: {
     marginBottom: hp("3%"),
-    fontSize: wp("6%"),
+    fontSize: wp("4.5%"),
   },
   removeFriendButtonContainer: {
     position: "absolute",
