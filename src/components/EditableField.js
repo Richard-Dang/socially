@@ -14,6 +14,7 @@ const EditableField = ({ fieldName, setField, value }) => {
         inputContainerStyle={styles.inputContainer}
         onChangeText={setField}
         value={value}
+        inputStyle={styles.inputText}
       />
     </View>
   );
@@ -23,17 +24,21 @@ export default EditableField;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row"
+    flexDirection: "row",
     // borderColor: "red",
     // borderWidth: 5
   },
+  inputText: {
+    fontSize: wp("4%"),
+    marginBottom: hp("-0.5%")
+  },
   inputContainer: {
-    marginTop: hp("-1%"),
+    marginTop: hp("-1.5%"),
     marginBottom: hp("2%"),
-    width: wp("60%")
+    width: wp("60%"),
   },
   fieldName: {
-    fontSize: wp("5%"),
+    fontSize: wp("4%"),
     marginLeft: wp("10%"),
-  }
+  },
 });

@@ -19,6 +19,7 @@ const EditableAccount = ({ socialAccount, modifers }) => {
         style={styles.icon}
       />
       <Input
+        inputStyle={styles.inputText}
         inputContainerStyle={styles.inputBox}
         rightIcon={
           <TouchableOpacity
@@ -55,5 +56,9 @@ const styles = StyleSheet.create({
   inputBox: {
     margin: 0,
     width: wp("60%"),
+  },
+  inputText:{
+    fontSize: wp("4%"),
+    marginBottom: hp("-1%")
   },
 });

@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginBottom: hp("3%"),
   },
   accountLabel: {
-    fontSize: wp("5%"),
+    fontSize: wp("4%"),
     marginLeft: wp("10%"),
     marginBottom: hp("2%"),
   },
@@ -168,7 +168,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: wp("4%"),
-    marginTop: hp("1%"),
   },
   dropdownContainer: {
     // marginRight: wp("5%"),
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
   },
   addIcon: { marginTop: hp("1%") },
   accountsListContainer: {
-    height: hp("35%"),
-    marginLeft: wp("5%")
+    height: hp("30%"),
+    marginLeft: wp("5%"),
   },
 });
