@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   accountLabel: {
     fontSize: wp("5%"),
-    marginLeft: wp("7%"),
+    marginLeft: wp("10%"),
     marginBottom: hp("2%"),
   },
   logoutButtonContainer: {
@@ -180,5 +180,6 @@ const styles = StyleSheet.create({
   addIcon: { marginTop: hp("1%") },
   accountsListContainer: {
     height: hp("38%"),
+    marginLeft: wp("5%")
   },
 });

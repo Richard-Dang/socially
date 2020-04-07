@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
   },
   fieldName: {
     fontSize: wp("5%"),
-    marginLeft: wp("7%"),
+    marginLeft: wp("10%"),
   }
 });
