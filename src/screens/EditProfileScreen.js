@@ -87,46 +87,45 @@ const EditProfileScreen = ({ navigation }) => {
       <EditableField fieldName="Bio     " setField={setBio} value={bio} />
       <Text style={styles.accountLabel}>Accounts</Text>
       <View style={styles.accountsListContainer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <FlatList
-            scrollEnabled={false}
-            data={socialAccounts}
-            keyExtractor={(item) => item._id}
-            renderItem={({ item: socialAccount }) => {
-              return (
-                <EditableAccount
-                  socialAccount={socialAccount}
-                  modifers={{ editSocialAccount, removeSocialAccount }}
-                />
-              );
+        <FlatList
+          scrollEnabled
+          showsVerticalScrollIndicator={false}
+          data={socialAccounts}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item: socialAccount }) => {
+            return (
+              <EditableAccount
+                socialAccount={socialAccount}
+                modifers={{ editSocialAccount, removeSocialAccount }}
+              />
+            );
+          }}
+        />
+        <View style={styles.dropdownContainer}>
+          <RNPickerSelect
+            Icon={() => (
+              <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
+            )}
+            style={dropdownStyle}
+            placeholder={{
+              label: "Add account",
+              value: null,
             }}
+            value={dropDownItem}
+            onValueChange={(value) => {
+              setDropDownItem(value);
+            }}
+            onDonePress={() => {
+              addSocialAccount({
+                accountType: dropDownItem,
+                userId: currentUser._id,
+              });
+              setDropDownItem(null);
+            }}
+            items={dropDownItems}
+            doneText="Add"
           />
-          <View style={styles.dropdownContainer}>
-            <RNPickerSelect
-              Icon={() => (
-                <Icon name="plus" type="entypo" iconStyle={styles.addIcon} />
-              )}
-              style={dropdownStyle}
-              placeholder={{
-                label: "Add account",
-                value: null,
-              }}
-              value={dropDownItem}
-              onValueChange={(value) => {
-                setDropDownItem(value);
-              }}
-              onDonePress={() => {
-                addSocialAccount({
-                  accountType: dropDownItem,
-                  userId: currentUser._id,
-                });
-                setDropDownItem(null);
-              }}
-              items={dropDownItems}
-              doneText="Add"
-            />
-          </View>
-        </ScrollView>
+        </View>
       </View>
 
       <View style={styles.logoutButtonContainer}>
