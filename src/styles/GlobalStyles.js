@@ -8,7 +8,7 @@ export default StyleSheet.create({
   backButton: {
     alignSelf: "flex-start",
     marginLeft: wp("5%"),
-    marginTop: hp("3%"),
+    marginTop: hp("1%"),
   },
   inputContainer: {
     borderWidth: wp("1%"),
