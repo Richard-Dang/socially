@@ -2,6 +2,7 @@
   "expo": {
     "name": "Socially",
     "slug": "socially",
+    "description":"Socially is a social media hub app that allows users to share their social media handles from various accounts.",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
@@ -18,7 +19,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.socially.socially",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.socially.socially",
+      "versionCode": 1
     }
   }
 }
