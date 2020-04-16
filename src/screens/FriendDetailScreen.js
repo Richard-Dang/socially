@@ -118,6 +118,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   accountsContainer: {
-    height: hp("32%"),
+    height: hp("35%"),
   },
 });

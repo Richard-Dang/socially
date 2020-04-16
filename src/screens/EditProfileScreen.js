@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FlatList, StyleSheet, View, ScrollView, Platform } from "react-native";
 import { Avatar, Button, Header, Icon, Text } from "react-native-elements";
-import { NavigationEvents } from "react-navigation";
+import { NavigationEvents, SafeAreaView } from "react-navigation";
 import EditableAccount from "../components/EditableAccount";
 import EditableField from "../components/EditableField";
 import { Context as AuthContext } from "../context/AuthContext";
@@ -74,6 +74,7 @@ const EditProfileScreen = ({ navigation }) => {
             <Text>Save</Text>
           </TouchableOpacity>
         }
+        containerStyle={styles.header}
       />
       <Avatar
         rounded
@@ -187,7 +188,10 @@ const styles = StyleSheet.create({
   },
   addIcon: { marginTop: hp("1%") },
   accountsListContainer: {
-    height: hp("30%"),
+    height: hp("38%"),
     marginLeft: wp("5%"),
+  },
+  header: {
+    marginTop: Platform.OS === "android" ? hp("-4%") : 0,
   },
 });

@@ -1,7 +1,11 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { Icon, ThemeProvider } from "react-native-elements";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  SafeAreaView,
+} from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -23,6 +27,10 @@ YellowBox.ignoreWarnings([
   // TODO: Remove when fixed
   'Warning: Each child in a list should have a unique "key" prop',
 ]);
+
+if (Platform.OS === "android") {
+  SafeAreaView.setStatusBarHeight(0);
+}
 
 const friendListFlow = createStackNavigator({
   FriendList: FriendListScreen,
@@ -51,7 +59,7 @@ const switchNavigator = createSwitchNavigator(
     ),
     EditProfile: EditProfileScreen,
   },
-  { initialRouteName: "ResolveAuth" }
+  { initialRouteName: "ResolveAuth"}
 );
 
 const App = createAppContainer(switchNavigator);
