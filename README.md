@@ -4,7 +4,7 @@
 
 Socially is a social media hub app that allows users to share their social media handles from various accounts.
 
-## [Socially App Demo]("https://bit.ly/2xUIg3I")
+## [Socially App Demo](https://bit.ly/2xUIg3I)
 
 ## Features
 
