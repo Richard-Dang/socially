@@ -34,8 +34,6 @@ const FriendDetailScreen = ({ navigation }) => {
     <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
       <NavigationEvents
         onWillFocus={() => fetchSocialAccounts({ userId: user._id })}
-        // TODO: onWillBlur currently not working for some reason
-        // onWillBlur={clearSocialAccounts}
       />
       {_id ? (
         <Icon

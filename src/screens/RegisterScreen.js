@@ -9,16 +9,24 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { NavigationEvents } from "react-navigation";
+import { validate } from "../helpers/validate";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const {
     state: { errorMessage },
     register,
     clearErrorMessage,
+    addErrorMessage,
   } = useContext(AuthContext);
 
   return (
@@ -39,6 +47,10 @@ const RegisterScreen = ({ navigation }) => {
         value={email}
         onChangeText={setEmail}
         inputContainerStyle={GlobalStyles.inputContainer}
+        onBlur={() => {
+          setEmailError(validate("email", email));
+        }}
+        errorMessage={emailError}
       />
       <Input
         placeholder="Username"
@@ -47,6 +59,10 @@ const RegisterScreen = ({ navigation }) => {
         value={username}
         onChangeText={setUsername}
         inputContainerStyle={GlobalStyles.inputContainer}
+        onBlur={() => {
+          setUsernameError(validate("username", username));
+        }}
+        errorMessage={usernameError}
       />
       <Input
         placeholder="Full Name"
@@ -55,6 +71,10 @@ const RegisterScreen = ({ navigation }) => {
         value={name}
         onChangeText={setName}
         inputContainerStyle={GlobalStyles.inputContainer}
+        onBlur={() => {
+          setNameError(validate("name", name));
+        }}
+        errorMessage={nameError}
       />
       <Input
         placeholder="Password"
@@ -64,12 +84,21 @@ const RegisterScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
         inputContainerStyle={GlobalStyles.inputContainer}
+        onBlur={() => {
+          setPasswordError(validate("password", password));
+        }}
+        errorMessage={passwordError}
       />
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-      {/* TODO: Add error messages for failed login and field validation */}
       <Button
         title="Sign up"
-        onPress={() => register({ email, username, name, password })}
+        onPress={() => {
+          if (!usernameError && !passwordError && !nameError && !emailError) {
+            register({ email, username, name, password });
+          } else {
+            addErrorMessage({ errorMessage: "Please verify fields" });
+          }
+        }}
         style={styles.button}
       />
     </SafeAreaView>

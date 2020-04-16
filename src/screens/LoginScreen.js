@@ -37,7 +37,6 @@ const LoginScreen = ({ navigation }) => {
         value={email}
         onChangeText={setEmail}
         inputContainerStyle={GlobalStyles.inputContainer}
-        errorMessage="Enter a valid email"
       />
       <Input
         placeholder="Password"
@@ -49,9 +48,6 @@ const LoginScreen = ({ navigation }) => {
         inputContainerStyle={GlobalStyles.inputContainer}
       />
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-
-      {/* TODO: Add error messages for failed login and field validation */}
-      {/* TODO: Adding loading to button during API request by using state */}
       <Button
         title="Log in"
         onPress={() => login({ email, password })}

@@ -24,6 +24,9 @@ const theme = {
     inputContainerStyle: {
       margin: wp("3%"),
     },
+    errorStyle: {
+      marginLeft: wp("5%"),
+    },
   },
   Header: {
     backgroundColor: "white",

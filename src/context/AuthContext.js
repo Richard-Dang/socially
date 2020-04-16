@@ -24,6 +24,10 @@ const authReducer = (state, action) => {
   }
 };
 
+const addErrorMessage = (dispatch) => async ({ errorMessage }) => {
+  dispatch({ type: "add_error_message", payload: { errorMessage } });
+};
+
 const clearErrorMessage = (dispatch) => async () => {
   dispatch({ type: "clear_error_message" });
 };
@@ -101,6 +105,14 @@ const updateUser = (dispatch) => async ({ name, bio }) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { register, login, tryLocalLogin, logout, updateUser, clearErrorMessage },
+  {
+    register,
+    login,
+    tryLocalLogin,
+    logout,
+    updateUser,
+    clearErrorMessage,
+    addErrorMessage,
+  },
   { token: null, currentUser: null, errorMessage: "" }
 );

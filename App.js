@@ -20,7 +20,7 @@ import { Provider as SocialAccountProvider } from "./src/context/SocialAccountCo
 import { YellowBox } from "react-native";
 
 YellowBox.ignoreWarnings([
-  "VirtualizedLists should never be nested", // TODO: Remove when fixed
+  // TODO: Remove when fixed
   'Warning: Each child in a list should have a unique "key" prop',
 ]);
 
