@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FlatList, StyleSheet, View, ScrollView } from "react-native";
+import { FlatList, StyleSheet, View, ScrollView, Platform } from "react-native";
 import { Avatar, Button, Header, Icon, Text } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
 import EditableAccount from "../components/EditableAccount";
@@ -116,13 +116,21 @@ const EditProfileScreen = ({ navigation }) => {
             value={dropDownItem}
             onValueChange={(value) => {
               setDropDownItem(value);
+              if (Platform.OS === "android" && value) {
+                addSocialAccount({
+                  accountType: value,
+                  userId: currentUser._id,
+                });
+              }
             }}
             onDonePress={() => {
-              addSocialAccount({
-                accountType: dropDownItem,
-                userId: currentUser._id,
-              });
-              setDropDownItem(null);
+              if (Platform.OS === "ios") {
+                addSocialAccount({
+                  accountType: dropDownItem,
+                  userId: currentUser._id,
+                });
+                setDropDownItem(null);
+              }
             }}
             items={dropDownItems}
             doneText="Add"
