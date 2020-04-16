@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import { StyleSheet, View, ImageBackground, Image } from "react-native";
 import { Button, Text, Icon } from "react-native-elements";
 import {
   widthPercentageToDP as wp,
@@ -10,11 +10,14 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../assets/splash.jpg")}
+        source={require("../../assets/splash.png")}
         style={styles.image}
       >
         <View style={styles.appNameContainer}>
-          <Text style={styles.appName}>Socially</Text>
+          <Image
+            source={require("../../assets/title.png")}
+            style={styles.appName}
+          />
         </View>
         <View style={styles.buttonLayout}>
           <View style={styles.buttonContainer}>
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     // borderWidth: 5,
     flex: 1,
   },
-  appName: { fontWeight: "400", fontSize: wp("15%") },
+  appName: { flex: 1, resizeMode: "contain", margin: wp("10%") },
   buttonLayout: {
     backgroundColor: "white",
     flexDirection: "row",

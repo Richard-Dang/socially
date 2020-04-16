@@ -11,7 +11,7 @@ const theme = {
     buttonStyle: {
       backgroundColor: "black",
       margin: wp("3%"),
-      height: hp("4.5%"),
+      height: hp("5%"),
     },
   },
   Text: {
