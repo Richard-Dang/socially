@@ -8,18 +8,27 @@ const authReducer = (state, action) => {
     case "login":
       return {
         token: action.payload.token,
-        currentUser: action.payload.currentUser
+        currentUser: action.payload.currentUser,
+        errorMessage: "",
       };
     case "logout":
-      return { ...state, token: null };
+      return { ...state, token: null, errorMessage: "" };
     case "update_user":
       return { ...state, currentUser: action.payload.currentUser };
+    case "add_error_message":
+      return { ...state, errorMessage: action.payload.errorMessage };
+    case "clear_error_message":
+      return { ...state, errorMessage: "" };
     default:
       return state;
   }
 };
 
-const tryLocalLogin = dispatch => async () => {
+const clearErrorMessage = (dispatch) => async () => {
+  dispatch({ type: "clear_error_message" });
+};
+
+const tryLocalLogin = (dispatch) => async () => {
   const token = await AsyncStorage.getItem("token");
 
   if (token) {
@@ -31,13 +40,13 @@ const tryLocalLogin = dispatch => async () => {
   }
 };
 
-const register = dispatch => async ({ email, username, name, password }) => {
+const register = (dispatch) => async ({ email, username, name, password }) => {
   try {
     const response = await sociallyApi.post("/register", {
       email,
       username,
       name,
-      password
+      password,
     });
     const { token, currentUser } = response.data;
 
@@ -46,14 +55,18 @@ const register = dispatch => async ({ email, username, name, password }) => {
     navigate("FriendList");
   } catch (err) {
     console.log(err.response.data);
+    dispatch({
+      type: "add_error_message",
+      payload: { errorMessage: "Something went wrong with registering." },
+    });
   }
 };
 
-const login = dispatch => async ({ email, password }) => {
+const login = (dispatch) => async ({ email, password }) => {
   try {
     const response = await sociallyApi.post("/login", {
       email,
-      password
+      password,
     });
     const { token, currentUser } = response.data;
 
@@ -62,17 +75,21 @@ const login = dispatch => async ({ email, password }) => {
     navigate("FriendList");
   } catch (err) {
     console.log(err.response.data);
+    dispatch({
+      type: "add_error_message",
+      payload: { errorMessage: "Something went wrong with login." },
+    });
   }
 };
 
-const logout = dispatch => async () => {
+const logout = (dispatch) => async () => {
   await AsyncStorage.removeItem("token");
   dispatch({ type: "logout" });
   navigate("loginFlow");
 };
 
 // TODO: Probably want to refactor this method into a different context
-const updateUser = dispatch => async ({name, bio}) => {
+const updateUser = (dispatch) => async ({ name, bio }) => {
   try {
     const response = await sociallyApi.put("/user", { name, bio });
 
@@ -84,6 +101,6 @@ const updateUser = dispatch => async ({name, bio}) => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { register, login, tryLocalLogin, logout, updateUser },
-  { token: null, currentUser: null }
+  { register, login, tryLocalLogin, logout, updateUser, clearErrorMessage },
+  { token: null, currentUser: null, errorMessage: "" }
 );

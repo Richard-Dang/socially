@@ -8,16 +8,22 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { NavigationEvents } from "react-navigation";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const { register } = useContext(AuthContext);
+  const {
+    state: { errorMessage },
+    register,
+    clearErrorMessage,
+  } = useContext(AuthContext);
 
   return (
     <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
+      <NavigationEvents onWillFocus={clearErrorMessage} />
       <Icon
         containerStyle={GlobalStyles.backButton}
         name="back"
@@ -59,6 +65,7 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
         inputContainerStyle={GlobalStyles.inputContainer}
       />
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
       {/* TODO: Add error messages for failed login and field validation */}
       <Button
         title="Sign up"
@@ -83,4 +90,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: { margin: wp("4%") },
+  error: { color: "red", marginLeft: wp("7%"), marginTop: hp("2%") },
 });

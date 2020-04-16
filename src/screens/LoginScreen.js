@@ -8,14 +8,21 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { NavigationEvents } from "react-navigation";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
+  const {
+    state: { errorMessage },
+    login,
+    clearErrorMessage,
+  } = useContext(AuthContext);
 
   return (
     <SafeAreaView forceInset={{ top: "always" }} style={styles.container}>
+      <NavigationEvents onWillFocus={clearErrorMessage} />
+
       <Icon
         containerStyle={GlobalStyles.backButton}
         name="back"
@@ -30,6 +37,7 @@ const LoginScreen = ({ navigation }) => {
         value={email}
         onChangeText={setEmail}
         inputContainerStyle={GlobalStyles.inputContainer}
+        errorMessage="Enter a valid email"
       />
       <Input
         placeholder="Password"
@@ -40,6 +48,8 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry
         inputContainerStyle={GlobalStyles.inputContainer}
       />
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+
       {/* TODO: Add error messages for failed login and field validation */}
       {/* TODO: Adding loading to button during API request by using state */}
       <Button
@@ -65,4 +75,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: { margin: wp("4%") },
+  error: { color: "red", marginLeft: wp("7%"), marginTop: hp("2%") },
 });
