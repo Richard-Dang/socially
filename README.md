@@ -2,9 +2,11 @@
 
 ## Description
 
-Socially is a social media hub app that allows users to share their social media handles from various accounts.
+Socially lets you unify all your social media handles into a single application. Instead of asking all your friends from their Facebook, Instagram, LinkedIn, etc. you can now just ask them for their Socially! Search and add friends to view all their social media handles conveniently in one place.
 
 ## [Socially App Demo](https://bit.ly/2xUIg3I)
+
+## [Google Play](https://play.google.com/store/apps/details?id=com.socially.socially)
 
 ## Features
 
